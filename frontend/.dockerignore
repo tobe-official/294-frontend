@@ -1,6 +1,5 @@
 # Node modules - should be rebuilt in the container
 node_modules
-node_modules/
 
 npm-debug.log
 yarn-error.log
