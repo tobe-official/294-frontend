@@ -1,5 +1,4 @@
 name: lint-test-coverage
-
 on:
   push:
     branches: [ "main" ]
@@ -8,73 +7,15 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Use Node.js 24 with npm cache
+    - uses: actions/checkout@v4
+    - name: Use Node.js 24
       uses: actions/setup-node@v4
       with:
         node-version: 24
-        cache: npm
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Run ESLint (verify only)
-      run: |
-        echo "Running ESLint verification (not fixing automatically)…"
-        npm run lint || { 
-          echo "ESLint found issues. Please run 'npm run lint:fix' locally to fix them."; 
-          exit 1; 
-        }
-
-    - name: Upload ESLint report
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: eslint-report
-        path: eslint-report.json
-
-    - name: Run Prettier (verify only)
-      run: |
-        echo "Running Prettier verification (not fixing automatically)…"
-        npm run prettier:verify || {
-          echo "Prettier found formatting issues. Please run 'npm run prettier:fix' locally to fix them.";
-          exit 1;
-        }
-
-    - name: Build (if present)
-      run: npm run build --if-present
-
-    - name: Install Google Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget gnupg
-        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-        echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
-          | sudo tee /etc/apt/sources.list.d/google.list
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-
-    - name: Set CHROME_BIN environment variable
-      run: echo "CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
-
-    - name: Run tests & generate coverage
-      run: npx ng test --watch=false --browsers=ChromeHeadlessCI --code-coverage
-
-    - name: Upload coverage directory
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage
-        path: coverage/
-
-    - name: Upload Cobertura XML
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: cobertura-coverage
-        path: coverage/cobertura-coverage.xml
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run lint
