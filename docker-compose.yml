@@ -2,7 +2,6 @@ services:
   angular:
     build:
       context: ./frontend
-    platform: linux/amd64  # or use linux/arm64 for native Apple Silicon builds
     ports:
       - "4200:4200"
     volumes:
@@ -13,7 +12,6 @@ services:
   pocketbase:
     build:
       context: ./backend
-    platform: linux/amd64  # pocketbase is distributed as amd64 binaries
     ports:
       - "8090:8090"
     volumes:
