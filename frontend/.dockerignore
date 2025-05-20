@@ -1,0 +1,23 @@
+# Node modules - should be rebuilt in the container
+node_modules
+node_modules/
+
+npm-debug.log
+yarn-error.log
+
+# Angular build output (included via Docker COPY from dist/)
+dist
+.tmp
+.angular
+
+# IDE/editor settings
+.vscode
+.idea
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment files (optional — exclude if you bake them in)
+# .env
+# .env.local

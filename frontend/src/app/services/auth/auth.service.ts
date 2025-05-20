@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private pb = new PocketBase('http://127.0.0.1:8090');
+  private pb = new PocketBase('http://localhost:8090');
 
   constructor(private router: Router) {}
 
