@@ -2,16 +2,17 @@ name: lint-test-coverage
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   lint-eslint:
     name: Lint → ESLint
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -24,8 +25,8 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ github.ref_name }}-${{ hashFiles('**/package-lock.json') }}
+          path: frontend/node_modules
+          key: ${{ runner.os }}-node-${{ github.ref_name }}-${{ hashFiles('frontend/**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ github.ref_name }}-
             ${{ runner.os }}-node-
@@ -34,9 +35,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint (verify only)
-        run: |
-          echo "Running ESLint verification (not fixing automatically)…"
-          npm run lint
+        run: npm run lint
 
       - name: Upload ESLint report
         if: always()
@@ -48,6 +47,9 @@ jobs:
   lint-prettier:
     name: Lint → Prettier
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -60,8 +62,8 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ github.ref_name }}-${{ hashFiles('**/package-lock.json') }}
+          path: frontend/node_modules
+          key: ${{ runner.os }}-node-${{ github.ref_name }}-${{ hashFiles('frontend/**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ github.ref_name }}-
             ${{ runner.os }}-node-
@@ -70,9 +72,7 @@ jobs:
         run: npm ci
 
       - name: Run Prettier (verify only)
-        run: |
-          echo "Running Prettier verification (not fixing automatically)…"
-          npm run prettier:verify
+        run: npm run prettier:verify
 
   test-coverage:
     name: Test → Coverage
@@ -80,6 +80,9 @@ jobs:
     needs:
       - lint-eslint
       - lint-prettier
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -104,8 +107,8 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ github.ref_name }}-${{ hashFiles('**/package-lock.json') }}
+          path: frontend/node_modules
+          key: ${{ runner.os }}-node-${{ github.ref_name }}-${{ hashFiles('frontend/**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-${{ github.ref_name }}-
             ${{ runner.os }}-node-
@@ -129,4 +132,3 @@ jobs:
         with:
           name: cobertura-coverage
           path: coverage/cobertura-coverage.xml
-
