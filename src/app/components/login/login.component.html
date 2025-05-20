@@ -1,0 +1,37 @@
+<!--ik this is so shitty but for now its okay-->
+<form [formGroup]="form">
+  @if (dialogMode === "login") {
+    <div>
+      <input [formControl]="this.form.controls.email" />
+      <label>{{ "login.form.email" | translate }}</label>
+    </div>
+    <div>
+      <input [formControl]="this.form.controls.password" type="password" />
+      <label>{{ "login.form.password" | translate }}</label>
+    </div>
+  } @else {
+    <div>
+      <input [formControl]="this.form.controls.name" />
+      <label>{{ "login.form.name" | translate }}</label>
+    </div>
+    <div>
+      <input [formControl]="this.form.controls.email" />
+      <label>{{ "login.form.email" | translate }}</label>
+    </div>
+    <div>
+      <input [formControl]="this.form.controls.password" type="password" />
+      <label>{{ "login.form.password" | translate }}</label>
+    </div>
+    <div>
+      <input
+        [formControl]="this.form.controls.confirmPassword"
+        type="password"
+      />
+      <label>{{ "login.form.confirmPassword" | translate }}</label>
+    </div>
+  }
+  <button (click)="submit()">{{ submitTranslation() | translate }}</button>
+  <button (click)="toggleMode()">
+    {{ createAccountTranslation() | translate }}
+  </button>
+</form>

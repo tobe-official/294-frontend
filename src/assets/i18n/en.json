@@ -1,0 +1,14 @@
+{
+  "login": {
+    "form": {
+      "email": "Email",
+      "name": "Name",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submitLogin": "Login",
+      "submitRegister": "Register",
+      "noAccount": "no Account?",
+      "back": "back"
+    }
+  }
+}
