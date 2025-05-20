@@ -1,4 +1,4 @@
-import { Component, computed, Signal } from '@angular/core';
+import { Component, computed, signal, Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,15 +9,31 @@ import { AuthService } from '../../services/auth/auth.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/User';
+import {
+  MatError,
+  MatFormField,
+  MatInput,
+  MatLabel,
+} from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
-  imports: [TranslatePipe, ReactiveFormsModule],
+  imports: [
+    TranslatePipe,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton,
+    MatError,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   public dialogMode: 'login' | 'register' = 'login';
+  public touched: Signal<boolean> = signal(false);
   public submitTranslation: Signal<string> = computed(
     () => 'login.form.submitLogin',
   );
@@ -84,6 +100,7 @@ export class LoginComponent {
   }
 
   public submit() {
+    this.touched = signal(true);
     if (this.dialogMode === 'login') {
       this.login();
     } else {

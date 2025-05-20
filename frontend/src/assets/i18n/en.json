@@ -2,9 +2,13 @@
   "login": {
     "form": {
       "email": "Email",
+      "emailRequired": "email is required",
       "name": "Name",
+      "nameRequired": "name is required",
       "password": "Password",
+      "passwordRequired": "password is required",
       "confirmPassword": "Confirm Password",
+      "confirmPasswordRequired": "Confirm Password is required",
       "submitLogin": "Login",
       "submitRegister": "Register",
       "noAccount": "no Account?",
