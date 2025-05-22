@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
-import { User } from '../../models/User';
 import { Router } from '@angular/router';
+import { LoginUser } from '../../models/login-user';
+import { User } from '../../models/user';
+import { redirectTo } from '../../utils/router-functions';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +13,7 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
+  // do we really need all these awaits?
   public async register(user: User) {
     if (user) {
       await this.pb.collection('users').create(user);
@@ -18,10 +21,10 @@ export class AuthService {
   }
   public async logout() {
     this.pb.authStore.clear();
-    await this.router.navigate(['/']);
+    redirectTo('', this.router);
   }
 
-  public async login(user: User) {
+  public async login(user: LoginUser) {
     if (user.email && user.password) {
       await this.pb
         .collection('users')
@@ -34,5 +37,9 @@ export class AuthService {
 
   public async isLoggedIn() {
     return this.pb.authStore.isValid;
+  }
+
+  public getLoggenUser() {
+    return this.pb.authStore.record;
   }
 }

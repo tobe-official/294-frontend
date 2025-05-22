@@ -8,7 +8,6 @@ import {
 import { AuthService } from '../../services/auth/auth.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { User } from '../../models/User';
 import {
   MatError,
   MatFormField,
@@ -16,6 +15,10 @@ import {
   MatLabel,
 } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
+import { AppValues } from '../../appvalues';
+import { LoginUser } from '../../models/login-user';
+import { User } from '../../models/user';
+import { redirectTo } from '../../utils/router-functions';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +33,7 @@ import { MatButton } from '@angular/material/button';
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  standalone: true,
 })
 export class LoginComponent {
   public dialogMode: 'login' | 'register' = 'login';
@@ -53,16 +57,14 @@ export class LoginComponent {
   ) {}
 
   private async redirect() {
-    await this.router.navigate(['/home']);
+    redirectTo('home', this.router);
   }
   public async login() {
     if (this.form.controls.email.valid && this.form.controls.password.valid) {
-      const user: User = {
-        name: '',
-        email: this.form.value.email || '',
-        password: this.form.value.password || '',
-        passwordConfirm: '',
-        emailVisibility: false,
+      const rawValue = this.form.getRawValue();
+      const user: LoginUser = {
+        email: rawValue.email || '',
+        password: rawValue.password || '',
       };
       if (await this.authService.login(user)) {
         await this.redirect();
@@ -71,12 +73,14 @@ export class LoginComponent {
   }
   public async register() {
     if (this.form.valid) {
+      const rawValue = this.form.getRawValue();
       const user: User = {
-        name: this.form.value.name || '',
-        email: this.form.value.email || '',
-        password: this.form.value.password || '',
-        passwordConfirm: this.form.value.confirmPassword || '',
+        name: rawValue.name || '',
+        email: rawValue.email || '',
+        password: rawValue.password || '',
+        passwordConfirm: rawValue.confirmPassword || '',
         emailVisibility: false,
+        credits: AppValues.INITIAL_CREDITS,
       };
       await this.authService.register(user);
       if (await this.authService.login(user)) {

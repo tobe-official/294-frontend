@@ -4,4 +4,5 @@ export interface User {
   name: string;
   password: string;
   passwordConfirm: string;
+  credits: number;
 }
