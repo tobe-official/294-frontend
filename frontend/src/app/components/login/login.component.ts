@@ -47,8 +47,14 @@ export class LoginComponent {
   public readonly form = new FormGroup({
     name: new FormControl<string>('', [Validators.required]),
     email: new FormControl<string>('', [Validators.required]),
-    password: new FormControl<string>('', [Validators.required]),
-    confirmPassword: new FormControl<string>('', [Validators.required]),
+    password: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+    confirmPassword: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
 
   constructor(
@@ -90,6 +96,7 @@ export class LoginComponent {
   }
 
   public toggleMode() {
+    this.touched = signal(false);
     this.dialogMode = this.dialogMode === 'login' ? 'register' : 'login';
     this.submitTranslation = computed(() => {
       return this.dialogMode === 'login'
