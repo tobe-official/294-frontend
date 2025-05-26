@@ -1,9 +1,6 @@
 <mat-form-field>
   <mat-label>{{ "create.form.title" | translate }}</mat-label>
   <input matInput [formControl]="this.form.controls.title" />
-  <!--  @if (this.form.controls.confirmPassword.invalid && this.touched()) {-->
-  <!--    <mat-error>{{ "login.form.emailRequired" | translate }}</mat-error>-->
-  <!--  }-->
 </mat-form-field>
 
 <button mat-raised-button (click)="redirect('home')">back to home</button>

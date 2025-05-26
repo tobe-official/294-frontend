@@ -16,9 +16,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'cheatcheetDB' title`, () => {
+  it(`should have the 'cheatsheetDB' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('cheatcheetDB');
+    expect(app.title).toEqual('cheatsheetDB');
   });
 });

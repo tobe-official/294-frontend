@@ -10,7 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  public title = 'cheatcheetDB';
+  public title = 'cheatsheetDB';
   constructor(private translateService: TranslateService) {}
 
   public ngOnInit() {
