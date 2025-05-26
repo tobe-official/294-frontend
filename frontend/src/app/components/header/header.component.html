@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <button mat-button (click)="redirect('home')">
+    {{ "header.homeButtonLabel" | translate }}
+  </button>
+  <button mat-button (click)="redirect('browse')">
+    {{ "header.browseButtonLabel" | translate }}
+  </button>
+  <button mat-button (click)="redirect('profile')">
+    {{ "header.profileButtonLabel" | translate }}
+  </button>
+  <!-- <button mat-button (click)="redirect('create')">{{'header.createButtonLabel' | translate}}</button>-->
+
+  <div class="spacer"></div>
+
+  <button mat-raised-button (click)="logout()">
+    {{ "header.logoutButtonLabel" | translate }}
+  </button>
+</mat-toolbar>

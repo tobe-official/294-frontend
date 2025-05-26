@@ -1,5 +1,5 @@
 {
-  "name": "cheatcheet-db",
+  "name": "cheatsheet-db",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

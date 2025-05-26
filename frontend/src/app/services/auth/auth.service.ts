@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
-import {Router} from '@angular/router';
-import {LoginUser} from '../../models/login-user';
-import {User} from '../../models/user';
-import {redirectTo} from '../../utils/router-functions';
+import { Router } from '@angular/router';
+import { LoginUser } from '../../models/login-user';
+import { User } from '../../models/user';
+import { redirectTo } from '../../utils/router-functions';
 
 @Injectable({
   providedIn: 'root',

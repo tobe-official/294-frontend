@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {LoginComponent} from './login.component';
-import {provideTranslateMock} from '../../utils/translate-tests.function.spec';
-import {AuthService} from '../../services/auth/auth.service';
+import { LoginComponent } from './login.component';
+import { provideTranslateMock } from '../../utils/translate-tests.function.spec';
+import { AuthService } from '../../services/auth/auth.service';
 import SpyObj = jasmine.SpyObj;
 import createSpyObj = jasmine.createSpyObj;
 
@@ -12,11 +12,7 @@ describe('LoginComponent', () => {
   let mockAuthService: SpyObj<AuthService>;
 
   beforeEach(waitForAsync(() => {
-    mockAuthService = createSpyObj<AuthService>(
-      'AuthService',
-      ['login'],
-      {}
-    );
+    mockAuthService = createSpyObj<AuthService>('AuthService', ['login'], {});
   }));
 
   beforeEach(async () => {
@@ -39,23 +35,25 @@ describe('LoginComponent', () => {
       name: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     });
 
-    component.submit()
+    component.submit();
 
-    expect(mockAuthService.login).not.toHaveBeenCalled()
+    expect(mockAuthService.login).not.toHaveBeenCalled();
   });
 
   it('should change modes', () => {
-    component.dialogMode = 'login'
-    expect(component.submitTranslation()).toEqual('login.form.submitLogin')
-    expect(component.createAccountTranslation()).toEqual('login.form.noAccount')
-    component.toggleMode()
+    component.dialogMode = 'login';
+    expect(component.submitTranslation()).toEqual('login.form.submitLogin');
+    expect(component.createAccountTranslation()).toEqual(
+      'login.form.noAccount',
+    );
+    component.toggleMode();
 
-    expect(component.dialogMode).toEqual('register')
-    expect(component.submitTranslation()).toEqual('login.form.submitRegister')
-    expect(component.createAccountTranslation()).toEqual('login.form.back')
+    expect(component.dialogMode).toEqual('register');
+    expect(component.submitTranslation()).toEqual('login.form.submitRegister');
+    expect(component.createAccountTranslation()).toEqual('login.form.back');
   });
 
   it('should submit correctly', () => {
@@ -63,14 +61,13 @@ describe('LoginComponent', () => {
     spyOn(component, 'register');
     component.submit();
 
-    expect(component.touched()).toEqual(true)
-    expect(component.dialogMode).toEqual('login')
-    expect(component.login).toHaveBeenCalled()
+    expect(component.touched()).toEqual(true);
+    expect(component.dialogMode).toEqual('login');
+    expect(component.login).toHaveBeenCalled();
 
-    component.toggleMode()
-    expect(component.dialogMode).toEqual('register')
+    component.toggleMode();
+    expect(component.dialogMode).toEqual('register');
     component.submit();
-    expect(component.login).toHaveBeenCalled()
+    expect(component.login).toHaveBeenCalled();
   });
-
 });
