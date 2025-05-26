@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss',
-  standalone: true
+  standalone: true,
 })
 export class BrowseComponent {}
