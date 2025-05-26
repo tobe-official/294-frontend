@@ -44,7 +44,7 @@ export class LoginComponent {
   public createAccountTranslation: Signal<string> = computed(
     () => 'login.form.noAccount',
   );
-  public readonly form = new FormGroup({
+  public form = new FormGroup({
     name: new FormControl<string>('', [Validators.required]),
     email: new FormControl<string>('', [Validators.required]),
     password: new FormControl<string>('', [

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Signal, signal} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import { TranslatePipe } from '@ngx-translate/core';
 import { redirectTo } from '../../utils/router-functions';
 import { Router } from '@angular/router';
@@ -25,12 +25,14 @@ import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service'
     TranslatePipe,
     ReactiveFormsModule,
     MatButton,
+    MatError,
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss',
   standalone: true,
 })
 export class CreateComponent {
+  public touched: Signal<boolean> = signal(false);
   public readonly form = new FormGroup({
     title: new FormControl<string>('', [Validators.required]),
     description: new FormControl<string>('', [Validators.required]),
@@ -47,6 +49,7 @@ export class CreateComponent {
   }
 
   public submit() {
+    this.touched = signal(true);
     const rawValue = this.form.getRawValue();
     const cheatSheet: Cheatsheet = {
       title: rawValue.title || '',

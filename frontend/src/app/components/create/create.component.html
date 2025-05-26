@@ -1,7 +1,32 @@
 <mat-form-field>
   <mat-label>{{ "create.form.title" | translate }}</mat-label>
   <input matInput [formControl]="this.form.controls.title" />
+  @if (
+    this.form.controls.title.hasError("required") &&
+    this.touched()
+    ) {
+    <mat-error>{{ "login.form.titleRequired" | translate }}</mat-error>
+  }
 </mat-form-field>
-
+<mat-form-field>
+  <mat-label>{{ "create.form.description" | translate }}</mat-label>
+  <input matInput [formControl]="this.form.controls.description" />
+  @if (
+    this.form.controls.description.hasError("required") &&
+    this.touched()
+    ) {
+    <mat-error>{{ "login.form.descriptionRequired" | translate }}</mat-error>
+  }
+</mat-form-field>
+<mat-form-field>
+  <mat-label>{{ "create.form.pdfUrl" | translate }}</mat-label>
+  <input matInput [formControl]="this.form.controls.pdfUrl" />
+  @if (
+    this.form.controls.pdfUrl.hasError("required") &&
+    this.touched()
+    ) {
+    <mat-error>{{ "login.form.pdfUrlRequired" | translate }}</mat-error>
+  }
+</mat-form-field>
 <button mat-raised-button (click)="redirect('home')">back to home</button>
 <button mat-raised-button type="submit" (click)="submit()">create</button>
