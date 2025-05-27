@@ -1,0 +1,9 @@
+<div id="wholePage">
+  <app-header></app-header>
+  <div id="restOfPage">
+    <h4>Rest works!</h4>
+    @if (isLoggedIn) {
+      <button mat-raised-button (click)="redirect('create')">create</button>
+    }
+  </div>
+</div>

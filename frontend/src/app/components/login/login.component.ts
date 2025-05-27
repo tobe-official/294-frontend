@@ -65,6 +65,7 @@ export class LoginComponent {
   private async redirect() {
     redirectTo('home', this.router);
   }
+
   public async login() {
     if (this.form.controls.email.valid && this.form.controls.password.valid) {
       const rawValue = this.form.getRawValue();
@@ -77,6 +78,7 @@ export class LoginComponent {
       }
     }
   }
+
   public async register() {
     if (this.form.valid) {
       const rawValue = this.form.getRawValue();
@@ -113,9 +115,9 @@ export class LoginComponent {
   public submit() {
     this.touched = signal(true);
     if (this.dialogMode === 'login') {
-      this.login();
+      this.login().then((r) => r);
     } else {
-      this.register();
+      this.register().then((r) => r);
     }
   }
 }

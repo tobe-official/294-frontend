@@ -1,17 +1,36 @@
-<mat-toolbar color="primary">
-  <button mat-button (click)="redirect('home')">
-    {{ "header.homeButtonLabel" | translate }}
-  </button>
-  <button mat-button (click)="redirect('browse')">
-    {{ "header.browseButtonLabel" | translate }}
-  </button>
-  <button mat-button (click)="redirect('profile')">
-    {{ "header.profileButtonLabel" | translate }}
-  </button>
-
-  <div class="spacer"></div>
-
-  <button mat-raised-button (click)="logout()">
-    {{ "header.logoutButtonLabel" | translate }}
-  </button>
+<mat-toolbar id="header">
+  <div id="logoDiv">
+    <h1 id="logo">CheatSheetDB</h1>
+  </div>
+  <div id="buttonRow">
+    <button
+      class="headerButton"
+      mat-flat-button
+      (click)="redirect('home', false)"
+    >
+      {{ "header.homeButtonLabel" | translate }}
+    </button>
+    <button
+      class="headerButton"
+      mat-flat-button
+      (click)="redirect('browse', false)"
+    >
+      {{ "header.browseButtonLabel" | translate }}
+    </button>
+    <button
+      class="headerButton"
+      mat-flat-button
+      (click)="redirect('credits', false)"
+    >
+      {{ "header.creditsButtonLabel" | translate }}
+    </button>
+    <button
+      id="loginButton"
+      mat-stroked-button
+      color="#123456"
+      (click)="redirect('', isLoggedIn)"
+    >
+      {{ loginButtonLabel | translate }}
+    </button>
+  </div>
 </mat-toolbar>

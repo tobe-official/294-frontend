@@ -18,6 +18,7 @@ export class AuthService {
       await this.pb.collection('users').create(user);
     }
   }
+
   public async logout() {
     this.pb.authStore.clear();
     redirectTo('', this.router);
@@ -34,7 +35,7 @@ export class AuthService {
     return this.pb.authStore.isValid;
   }
 
-  public async isLoggedIn() {
+  public isLoggedIn(): boolean {
     return this.pb.authStore.isValid;
   }
 
