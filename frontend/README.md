@@ -1,4 +1,4 @@
-# CheatcheetDB
+# CheatsheetDB
 
 ## Development server
 

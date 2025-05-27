@@ -1,1 +1,27 @@
-<p>browse works!</p>
+<app-header></app-header>
+<div>
+  @for (cheatsheet of cheatsheets; track cheatsheet.id) {
+    <mat-card class="cheatsheet-card">
+      <div class="card-content">
+        <img
+          src="{{ cheatsheet['thumbnailUrl'] }}"
+          alt="image error"
+          class="preview-image"
+        />
+        <div class="details">
+          <h2>{{ cheatsheet["title"] }}</h2>
+          <p>
+            {{ cheatsheet["description"] }}
+          </p>
+          <div class="meta">
+            <mat-icon>person</mat-icon>
+            <!--            TODO: username display-->
+            <span>{{ "user" }}</span>
+            <mat-icon>calendar_today</mat-icon>
+            <span>{{ cheatsheet["createdAt"] | date: "dd.MM.yyyy" }}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  }
+</div>
