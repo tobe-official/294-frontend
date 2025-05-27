@@ -39,7 +39,7 @@ export class AuthService {
     return this.pb.authStore.isValid;
   }
 
-  public getLoggedInUser() {
+  public getLoggedInUser(): RecordModel | null {
     return this.pb.authStore.record;
   }
 
