@@ -1,1 +1,20 @@
-pb_data
+# PocketBase runtime database
+pb_data/
+
+# Go build artifacts
+pocketbase
+*.exe
+*.out
+
+# Dependency directories (if used outside module)
+vendor/
+
+# Editor/OS junk
+.DS_Store
+*.swp
+*.swo
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
