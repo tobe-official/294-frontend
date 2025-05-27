@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import PocketBase from 'pocketbase';
+import PocketBase, { RecordModel } from 'pocketbase';
 import { Router } from '@angular/router';
 import { LoginUser } from '../../models/login-user';
 import { User } from '../../models/user';
@@ -38,7 +38,11 @@ export class AuthService {
     return this.pb.authStore.isValid;
   }
 
-  public getLoggenUser() {
+  public getLoggedInUser() {
     return this.pb.authStore.record;
+  }
+
+  public async getUserById(userId: string): Promise<RecordModel> {
+    return await this.pb.collection('users').getOne(userId);
   }
 }

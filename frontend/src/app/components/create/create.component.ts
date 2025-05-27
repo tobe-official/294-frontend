@@ -16,10 +16,10 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { redirectTo } from '../../utils/router-functions';
 import { Router } from '@angular/router';
 import { MatButton } from '@angular/material/button';
-import { Cheatsheet } from '../../models/cheatsheet';
 import { AuthService } from '../../services/auth/auth.service';
 import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
 import { HeaderComponent } from '../header/header.component';
+import { Cheatsheet } from '../../models/cheatsheet';
 
 @Component({
   selector: 'app-create',
@@ -44,6 +44,7 @@ export class CreateComponent {
     title: new FormControl<string>('', [Validators.required]),
     description: new FormControl<string>('', [Validators.required]),
     pdfUrl: new FormControl<string>('', [Validators.required]),
+    thumbnailUrl: new FormControl<string>('', []),
   });
 
   constructor(
@@ -62,8 +63,10 @@ export class CreateComponent {
       title: rawValue.title || '',
       description: rawValue.description || '',
       pdfUrl: rawValue.pdfUrl || '',
-      uploader: this.authService.getLoggenUser(),
+      thumbnailUrl: rawValue.thumbnailUrl || '',
+      uploader: this.authService.getLoggedInUser()?.id,
     };
     this.cheatsheetService.create(cheatSheet);
+    redirectTo('home', this.router);
   }
 }

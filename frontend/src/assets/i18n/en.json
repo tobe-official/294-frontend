@@ -25,7 +25,9 @@
     "form": {
       "title": "title",
       "description": "description",
+      "thumbnailUrl": "url for thumbnail image",
       "pdfUrl": "url to the cheatsheet"
-    }
+    },
+    "back": "back"
   }
 }
