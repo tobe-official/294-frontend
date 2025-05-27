@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { MatToolbar } from '@angular/material/toolbar';
-import { MatButton } from '@angular/material/button';
-import { TranslatePipe } from '@ngx-translate/core';
-import { redirectTo } from '../../utils/router-functions';
-import { Router } from '@angular/router';
-import { RouteLocations } from '../../models/route-locations';
-import { AuthService } from '../../services/auth/auth.service';
+import {Component} from '@angular/core';
+import {MatToolbar} from '@angular/material/toolbar';
+import {MatButton} from '@angular/material/button';
+import {TranslatePipe} from '@ngx-translate/core';
+import {redirectTo} from '../../utils/router-functions';
+import {Router} from '@angular/router';
+import {RouteLocations} from '../../models/route-locations';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -39,4 +39,6 @@ export class HeaderComponent {
       redirectTo('', this.router);
     });
   }
+
+  protected readonly redirectTo = redirectTo;
 }

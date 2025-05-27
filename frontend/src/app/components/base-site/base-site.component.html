@@ -1,9 +1,34 @@
 <div id="wholePage">
-  <app-header></app-header>
-  <div id="restOfPage">
-    <h4>Rest works!</h4>
-    @if (isLoggedIn) {
-      <button mat-raised-button (click)="redirect('create')">create</button>
-    }
-  </div>
+    <app-header></app-header>
+    <div id="restOfPage">
+        <div id="titleAndDescriptionDiv">
+            @if (isLoggedIn) {
+                <h1 class="title">{{ 'baseSite.welcomeTitleLoginPt1' | translate }} {{ user['name'] }} {{ 'baseSite.welcomeTitleLoginPt2' | translate }}</h1>
+                <h3 class="description">{{ 'baseSite.descriptionLogin' | translate }} </h3>
+            } @else {
+                <h1 class="title">{{ 'baseSite.welcomeTitleLogout' | translate }}</h1>
+                <h3 class="description">{{ 'baseSite.descriptionLogout' | translate }} </h3>
+            }
+            <button id="uploadButton" mat-flat-button
+                    (click)="redirect('create')">{{ 'baseSite.uploadButtonLabel' | translate }}
+            </button>
+        </div>
+        <button
+                id="viewAllButton"
+                mat-flat-button
+                (click)="redirect('browse')"
+        >
+            {{ 'baseSite.viewAllButtonLabel' | translate }}
+        </button>
+
+
+        <!--cards-->
+        @for (sheet of topCheatSheets; track $index) {
+            <div class="card">
+                <h2>{{ sheet['title'] }}</h2>
+                <p>{{ sheet['description'] }}</p>
+                <p>⭐ {{ sheet['stars'] }}</p>
+            </div>
+        }
+    </div>
 </div>
