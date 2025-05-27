@@ -29,5 +29,12 @@
       "pdfUrl": "url to the cheatsheet"
     },
     "back": "back"
+  },
+  "browse": {
+    "noCheatsheets": "No cheatsheets found"
+  },
+  "profile": {
+    "createLabel": "member since",
+    "creditsLabel": "credits"
   }
 }

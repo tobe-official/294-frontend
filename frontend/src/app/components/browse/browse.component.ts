@@ -5,10 +5,11 @@ import { MatIcon } from '@angular/material/icon';
 import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
 import { RecordModel } from 'pocketbase';
 import { DatePipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-browse',
-  imports: [HeaderComponent, MatCard, MatIcon, DatePipe],
+  imports: [HeaderComponent, MatCard, MatIcon, DatePipe, TranslatePipe],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss',
   standalone: true,

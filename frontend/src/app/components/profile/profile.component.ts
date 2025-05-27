@@ -5,10 +5,11 @@ import { AuthService } from '../../services/auth/auth.service';
 import { RecordModel } from 'pocketbase';
 import { Router } from '@angular/router';
 import { redirectTo } from '../../utils/router-functions';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
-  imports: [DatePipe, HeaderComponent],
+  imports: [DatePipe, HeaderComponent, TranslatePipe],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })

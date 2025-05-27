@@ -1,5 +1,8 @@
 <app-header></app-header>
 <div>
+  @if (!cheatsheets.length) {
+    <h1>{{ "browse.noCheatsheets" | translate }}</h1>
+  }
   @for (cheatsheet of cheatsheets; track cheatsheet.id) {
     <mat-card class="cheatsheet-card">
       <div class="card-content">

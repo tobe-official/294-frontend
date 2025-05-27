@@ -1,25 +1,20 @@
 <app-header></app-header>
-<div>
-  <img [src]="user['avatarUrl']" alt="Avatar" />
+<div class="profile-wrapper">
+  <div class="profile-card">
+    <img [src]="user['avatarUrl']" alt="no image" class="avatar" />
 
-  <div>
     <h2>{{ user["name"] }}</h2>
     <p>{{ user["email"] }}</p>
 
-    <div>
+    <div class="stats">
       <div>
         <div>{{ user["credits"] }}</div>
-        <div>Credits</div>
+        <div>{{ "profile.creditsLabel" | translate }}</div>
       </div>
       <div>
+        <div>{{ "profile.createLabel" | translate }}</div>
         <div>{{ user["created"] | date }}</div>
-        <div>Created</div>
       </div>
-    </div>
-
-    <div>
-      <button>Edit</button>
-      <button>Logout</button>
     </div>
   </div>
 </div>
