@@ -1,1 +1,25 @@
-<p>profile works!</p>
+<app-header></app-header>
+<div>
+  <img [src]="user['avatarUrl']" alt="Avatar" />
+
+  <div>
+    <h2>{{ user["name"] }}</h2>
+    <p>{{ user["email"] }}</p>
+
+    <div>
+      <div>
+        <div>{{ user["credits"] }}</div>
+        <div>Credits</div>
+      </div>
+      <div>
+        <div>{{ user["created"] | date }}</div>
+        <div>Created</div>
+      </div>
+    </div>
+
+    <div>
+      <button>Edit</button>
+      <button>Logout</button>
+    </div>
+  </div>
+</div>
