@@ -58,15 +58,22 @@ export class CreateComponent {
 
   public submit() {
     this.touched = signal(true);
-    const rawValue = this.form.getRawValue();
-    const cheatSheet: Cheatsheet = {
-      title: rawValue.title || '',
-      description: rawValue.description || '',
-      pdfUrl: rawValue.pdfUrl || '',
-      thumbnailUrl: rawValue.thumbnailUrl || '',
-      uploader: this.authService.getLoggedInUser()?.id,
-    };
-    this.cheatsheetService.create(cheatSheet);
-    redirectTo('home', this.router);
+    if (this.form.valid) {
+      const rawValue = this.form.getRawValue();
+      const cheatSheet: Cheatsheet = {
+        title: rawValue.title || '',
+        description: rawValue.description || '',
+        pdfUrl: rawValue.pdfUrl || '',
+        thumbnailUrl: rawValue.thumbnailUrl || '',
+        uploader: this.authService.getLoggedInUser()?.id,
+      };
+      this.cheatsheetService.create(cheatSheet).then((record) => {
+        if (record) {
+          redirectTo('home', this.router);
+        } else {
+          console.error('Creation failed');
+        }
+      });
+    }
   }
 }

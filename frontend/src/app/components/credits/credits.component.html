@@ -1,1 +1,31 @@
-<p>credits works!</p>
+<app-header></app-header>
+
+<div class="credits-container">
+  <h2 class="leaderboard-title">
+    {{ "credits.leaderboard.title" | translate }}
+  </h2>
+  @if (users.length === 0) {
+    <div class="no-users-message">
+      {{ "credits.leaderboard.noUsers" | translate }}
+    </div>
+  } @else {
+    <table class="credits-leaderboard">
+      <thead>
+        <tr>
+          <th>{{ "credits.leaderboard.rank" | translate }}</th>
+          <th>{{ "credits.leaderboard.user" | translate }}</th>
+          <th>{{ "credits.leaderboard.credits" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.id; let i = $index) {
+          <tr class="user-row" [ngClass]="{ 'top-three': i < 3 }">
+            <td class="rank">{{ i + 1 }}</td>
+            <td class="username">{{ user["name"] }}</td>
+            <td class="credits">{{ user["credits"] }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
