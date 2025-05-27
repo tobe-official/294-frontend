@@ -17,10 +17,10 @@ export class HomeComponent {
     private authService: AuthService,
   ) {}
   public logout() {
-    this.authService.logout();
+    this.authService.logout().then(r => r);
   }
 
-  public redirect(location: 'create' | 'browse') {
+  public redirect(location: 'create' | 'browse' | 'credits') {
     redirectTo(location, this.router);
   }
 }

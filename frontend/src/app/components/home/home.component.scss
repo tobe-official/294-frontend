@@ -1,0 +1,32 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+#wholePage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-content: start;
+  justify-content: center;
+
+  #header{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    background-color: aqua;
+    align-content: center;
+    justify-content: space-around;
+
+    #buttonRow{
+      display: flex;
+      align-content: center;
+      justify-content: space-around;
+      width: 20%;
+      height: 100%;
+      background-color: red;
+    }
+  }
+}

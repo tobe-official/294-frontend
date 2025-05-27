@@ -4,10 +4,16 @@ import { HomeComponent } from './components/home/home.component';
 import { loginGuard } from './guards/login.guard';
 import { BrowseComponent } from './components/browse/browse.component';
 import { CreateComponent } from './components/create/create.component';
+import {BaseSiteComponent} from './components/base-site/base-site.component';
+import {CreditsComponent} from './components/credits/credits.component';
 
 export const routes: Routes = [
   {
     path: '',
+    component: BaseSiteComponent,
+  },
+  {
+    path: 'login',
     component: LoginComponent,
   },
   {
@@ -25,4 +31,9 @@ export const routes: Routes = [
     canActivate: [loginGuard],
     component: BrowseComponent,
   },
+  {
+    path: 'credits',
+    canActivate: [loginGuard],
+    component: CreditsComponent,
+  }
 ];

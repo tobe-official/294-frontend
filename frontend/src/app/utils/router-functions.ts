@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 
 export function redirectTo(
-  location: '' | 'create' | 'home' | 'browse',
+  location: '' | 'create' | 'home' | 'browse' | 'login' | 'credits',
   router: Router,
 ) {
-  router.navigate(['/' + location]);
+  router.navigate(['/' + location]).then(r => r);
 }
