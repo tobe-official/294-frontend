@@ -14,5 +14,20 @@
       "noAccount": "No account?",
       "back": "back"
     }
+  },
+  "header": {
+    "homeButtonLabel": "Home",
+    "browseButtonLabel": "Browse Cheatsheets",
+    "profileButtonLabel": "Profile",
+    "logoutButtonLabel": "Logout"
+  },
+  "create": {
+    "form": {
+      "title": "title",
+      "description": "description",
+      "thumbnailUrl": "url for thumbnail image",
+      "pdfUrl": "url to the cheatsheet"
+    },
+    "back": "back"
   }
 }

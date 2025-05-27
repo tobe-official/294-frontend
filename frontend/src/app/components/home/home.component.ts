@@ -3,10 +3,11 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { redirectTo } from '../../utils/router-functions';
 import { MatButton } from '@angular/material/button';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-home',
-  imports: [MatButton],
+  imports: [MatButton, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   standalone: true,

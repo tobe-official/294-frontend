@@ -3,10 +3,9 @@
     <div>
       <mat-form-field>
         <mat-label>{{ "login.form.email" | translate }}</mat-label>
-        <input matInput [formControl]="this.form.controls.email" />
+        <input matInput [formControl]="form.controls.email" />
         @if (
-          this.form.controls.confirmPassword.hasError("required") &&
-          this.touched()
+          form.controls.confirmPassword.hasError("required") && this.touched()
         ) {
           <mat-error>{{ "login.form.emailRequired" | translate }}</mat-error>
         }
@@ -17,12 +16,11 @@
         <mat-label>{{ "login.form.password" | translate }}</mat-label>
         <input
           matInput
-          [formControl]="this.form.controls.password"
+          [formControl]="form.controls.password"
           type="password"
         />
         @if (
-          this.form.controls.confirmPassword.hasError("required") &&
-          this.touched()
+          form.controls.confirmPassword.hasError("required") && this.touched()
         ) {
           <mat-error>{{ "login.form.passwordRequired" | translate }}</mat-error>
         }
@@ -32,10 +30,9 @@
     <div>
       <mat-form-field>
         <mat-label>{{ "login.form.name" | translate }}</mat-label>
-        <input matInput [formControl]="this.form.controls.name" />
+        <input matInput [formControl]="form.controls.name" />
         @if (
-          this.form.controls.confirmPassword.hasError("required") &&
-          this.touched()
+          form.controls.confirmPassword.hasError("required") && this.touched()
         ) {
           <mat-error>{{ "login.form.nameRequired" | translate }}</mat-error>
         }
@@ -44,10 +41,9 @@
     <div>
       <mat-form-field>
         <mat-label>{{ "login.form.email" | translate }}</mat-label>
-        <input matInput [formControl]="this.form.controls.email" />
+        <input matInput [formControl]="form.controls.email" />
         @if (
-          this.form.controls.confirmPassword.hasError("required") &&
-          this.touched()
+          form.controls.confirmPassword.hasError("required") && this.touched()
         ) {
           <mat-error>{{ "login.form.emailRequired" | translate }}</mat-error>
         }
@@ -58,12 +54,11 @@
         <mat-label>{{ "login.form.password" | translate }}</mat-label>
         <input
           matInput
-          [formControl]="this.form.controls.password"
+          [formControl]="form.controls.password"
           type="password"
         />
         @if (
-          this.form.controls.confirmPassword.hasError("required") &&
-          this.touched()
+          form.controls.confirmPassword.hasError("required") && this.touched()
         ) {
           <mat-error>{{ "login.form.passwordRequired" | translate }}</mat-error>
         }
@@ -73,13 +68,12 @@
       <mat-form-field>
         <mat-label>{{ "login.form.confirmPassword" | translate }}</mat-label>
         <input
-          [formControl]="this.form.controls.confirmPassword"
+          [formControl]="form.controls.confirmPassword"
           type="password"
           matInput
         />
         @if (
-          this.form.controls.confirmPassword.hasError("required") &&
-          this.touched()
+          form.controls.confirmPassword.hasError("required") && this.touched()
         ) {
           <mat-error>{{
             "login.form.confirmPasswordRequired" | translate

@@ -1,8 +1,8 @@
-import { AuthRecord } from 'pocketbase';
-
 export interface Cheatsheet {
   title: string;
   description: string;
   pdfUrl: string;
-  uploader: AuthRecord;
+  // RELATION_RECORD_ID
+  uploader: string | undefined;
+  thumbnailUrl: string;
 }

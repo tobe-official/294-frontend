@@ -6,6 +6,7 @@ import { BrowseComponent } from './components/browse/browse.component';
 import { CreateComponent } from './components/create/create.component';
 import {BaseSiteComponent} from './components/base-site/base-site.component';
 import {CreditsComponent} from './components/credits/credits.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,11 @@ export const routes: Routes = [
     path: 'create',
     canActivate: [loginGuard],
     component: CreateComponent,
+  },
+  {
+    path: 'profile',
+    canActivate: [loginGuard],
+    component: ProfileComponent,
   },
   {
     path: 'browse',
