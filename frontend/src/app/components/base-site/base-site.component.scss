@@ -6,39 +6,47 @@
   justify-content: start;
   flex-direction: column;
 
-  #header{
-    height: 7%;
+  #header {
+    background-color: white;
     width: 100%;
     display: flex;
-    background-color: white;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-    #logoDiv{
+    #logoDiv {
       width: 12%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
 
-      #logo{
+      #logo {
         margin: 0;
         padding: 0;
       }
     }
 
-    #buttonRow{
+    #buttonRow {
       display: flex;
       align-items: center;
       justify-content: space-around;
       width: 25%;
       height: 100%;
-      background-color: white;
+
+      .headerButton {
+        background-color: transparent;
+        border-radius: 10px;
+      }
+
+      #loginButton {
+        border: 1.5px solid #3078F2 !important;
+        border-radius: 10px;
+      }
     }
   }
 
-  #restOfPage{
+  #restOfPage {
     height: 93%;
     width: 100%;
     display: flex;

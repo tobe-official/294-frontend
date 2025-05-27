@@ -17,9 +17,11 @@
   },
   "header": {
     "homeButtonLabel": "Home",
-    "browseButtonLabel": "Browse Cheatsheets",
+    "browseButtonLabel": "Browse",
     "profileButtonLabel": "Profile",
-    "logoutButtonLabel": "Logout"
+    "logoutButtonLabel": "Logout",
+    "creditsButtonLabel": "Credits",
+    "loginButtonLabel": "Login"
   },
   "create": {
     "form": {

@@ -24,6 +24,6 @@ export class HeaderComponent {
   }
 
   public logout() {
-    this.authService.logout();
+    this.authService.logout().then(r => r);
   }
 }

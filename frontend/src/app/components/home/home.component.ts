@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { redirectTo } from '../../utils/router-functions';
 import { MatButton } from '@angular/material/button';
 import { HeaderComponent } from '../header/header.component';
+import {RouteLocations} from '../../models/route-locations';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ export class HomeComponent {
     this.authService.logout().then(r => r);
   }
 
-  public redirect(location: 'create' | 'browse' | 'credits') {
+  public redirect(location: RouteLocations) {
     redirectTo(location, this.router);
   }
 }

@@ -1,17 +1,24 @@
 <div id="wholePage">
-  <!--Custom header component because its not the same header as the other-->
-  <header id="header">
-    <div id="logoDiv">
-      <h1 id="logo">CheatSheetDB</h1>
+    <mat-toolbar id="header">
+        <div id="logoDiv">
+            <h1 id="logo">CheatSheetDB</h1>
+        </div>
+        <div id="buttonRow">
+            <button class="headerButton" mat-flat-button
+                    (click)="redirect()">{{ "header.homeButtonLabel" | translate }}
+            </button>
+            <button class="headerButton" mat-flat-button
+                    (click)="redirect()">{{ "header.browseButtonLabel" | translate }}
+            </button>
+            <button class="headerButton" mat-flat-button
+                    (click)="redirect()">{{ "header.creditsButtonLabel" | translate }}
+            </button>
+            <button id="loginButton" mat-stroked-button color="#123456"
+                    (click)="redirect()">{{ "header.loginButtonLabel" | translate }}
+            </button>
+        </div>
+    </mat-toolbar>
+    <div id="restOfPage">
+        <h4>Rest works!</h4>
     </div>
-    <div id="buttonRow">
-      <button class="headerButton" mat-flat-button (click)="redirect('login')">Login</button>
-      <button class="headerButton" mat-flat-button (click)="redirect('home')">Home</button>
-      <button class="headerButton" mat-flat-button (click)="redirect('credits')">Credits</button>
-      <button id="loginButton" mat-stroked-button (click)="redirect('credits')">Credits</button>
-    </div>
-  </header>
-  <div id="restOfPage">
-    <h4>Rest works!</h4>
-  </div>
 </div>
