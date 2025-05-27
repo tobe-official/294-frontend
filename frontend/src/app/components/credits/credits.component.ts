@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-credits',
   imports: [],
   templateUrl: './credits.component.html',
-  styleUrl: './credits.component.scss'
+  styleUrl: './credits.component.scss',
 })
-export class CreditsComponent {
-
-}
+export class CreditsComponent {}

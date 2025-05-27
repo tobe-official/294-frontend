@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import PocketBase, {RecordModel} from 'pocketbase';
-import {Router} from '@angular/router';
-import {LoginUser} from '../../models/login-user';
-import {User} from '../../models/user';
-import {redirectTo} from '../../utils/router-functions';
+import { Injectable } from '@angular/core';
+import PocketBase, { RecordModel } from 'pocketbase';
+import { Router } from '@angular/router';
+import { LoginUser } from '../../models/login-user';
+import { User } from '../../models/user';
+import { redirectTo } from '../../utils/router-functions';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,7 @@ import {redirectTo} from '../../utils/router-functions';
 export class AuthService {
   private pb = new PocketBase('http://localhost:8090');
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   public async register(user: User) {
     if (user) {

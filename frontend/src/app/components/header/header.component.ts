@@ -14,16 +14,29 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+  public isLoggedIn: boolean = false;
 
-  public redirect(location: RouteLocations) {
-    redirectTo(location, this.router);
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-  public logout() {
-    this.authService.logout().then(r => r);
+  public get loginButtonLabel(): string {
+    return this.isLoggedIn
+      ? 'header.logoutButtonLabel'
+      : 'header.loginButtonLabel';
+  }
+
+  public redirect(location: RouteLocations, isLogout: boolean): void {
+    if (isLogout) this.logout();
+    else redirectTo(this.isLoggedIn ? location : 'login', this.router);
+  }
+
+  public logout(): void {
+    this.authService.logout().then(() => {
+      redirectTo('', this.router);
+    });
   }
 }

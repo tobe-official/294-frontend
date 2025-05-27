@@ -1,3 +1,41 @@
-.spacer {
-  flex: 1 1 auto;
+@import "../../../../src/styles";
+
+#header {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  #logoDiv {
+    width: 12%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #logo {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  #buttonRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 25%;
+    height: 100%;
+
+    .headerButton {
+      background-color: transparent;
+      border-radius: 8px;
+    }
+
+    #loginButton {
+      border: 1.5px solid $primary_blue !important;
+      border-radius: 8px;
+    }
+  }
 }

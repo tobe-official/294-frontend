@@ -1,1 +1,8 @@
-export type RouteLocations = '' | 'create' | 'home' | 'browse' | 'profile' | 'login' | 'credits';
+export type RouteLocations =
+  | ''
+  | 'create'
+  | 'home'
+  | 'browse'
+  | 'profile'
+  | 'login'
+  | 'credits';

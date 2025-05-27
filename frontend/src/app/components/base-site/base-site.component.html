@@ -1,28 +1,9 @@
 <div id="wholePage">
-    <mat-toolbar id="header">
-        <div id="logoDiv">
-            <h1 id="logo">CheatSheetDB</h1>
-        </div>
-        <div id="buttonRow">
-            <button class="headerButton" mat-flat-button
-                    (click)="redirect( 'home', false)">{{ "header.homeButtonLabel" | translate }}
-            </button>
-            <button class="headerButton" mat-flat-button
-                    (click)="redirect('browse', false)">{{ "header.browseButtonLabel" | translate }}
-            </button>
-            <button class="headerButton" mat-flat-button
-                    (click)="redirect( 'credits', false)">{{ "header.creditsButtonLabel" | translate }}
-            </button>
-            <button id="loginButton" mat-stroked-button color="#123456"
-                    (click)="redirect('', isLoggedIn())">
-                {{ loginButtonLabel | translate }}
-            </button>
-        </div>
-    </mat-toolbar>
-    <div id="restOfPage">
-        <h4>Rest works!</h4>
-        @if (isLoggedIn()) {
-            <button mat-raised-button (click)="redirect('create', false)">create</button>
-        }
-    </div>
+  <app-header></app-header>
+  <div id="restOfPage">
+    <h4>Rest works!</h4>
+    @if (isLoggedIn) {
+      <button mat-raised-button (click)="redirect('create')">create</button>
+    }
+  </div>
 </div>
