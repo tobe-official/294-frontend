@@ -15,5 +15,6 @@ services:
     ports:
       - "8090:8090"
     volumes:
+      - ./backend:/pb
       - ./backend/pb_data:/pb/pb_data
     restart: unless-stopped
