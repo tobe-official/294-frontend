@@ -1,24 +1,24 @@
-import { Component, computed, signal, Signal } from '@angular/core';
+import {Component, computed, signal, Signal} from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../services/auth/auth.service';
-import { TranslatePipe } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import {AuthService} from '../../services/auth/auth.service';
+import {TranslatePipe} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 import {
   MatError,
   MatFormField,
   MatInput,
   MatLabel,
 } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
-import { AppValues } from '../../appvalues';
-import { LoginUser } from '../../models/login-user';
-import { User } from '../../models/user';
-import { redirectTo } from '../../utils/router-functions';
+import {MatButton} from '@angular/material/button';
+import {AppValues} from '../../appvalues';
+import {LoginUser} from '../../models/login-user';
+import {User} from '../../models/user';
+import {redirectTo} from '../../utils/router-functions';
 
 @Component({
   selector: 'app-login',
@@ -60,11 +60,13 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-  ) {}
+  ) {
+  }
 
   private async redirect() {
     redirectTo('home', this.router);
   }
+
   public async login() {
     if (this.form.controls.email.valid && this.form.controls.password.valid) {
       const rawValue = this.form.getRawValue();
@@ -77,6 +79,7 @@ export class LoginComponent {
       }
     }
   }
+
   public async register() {
     if (this.form.valid) {
       const rawValue = this.form.getRawValue();
@@ -113,9 +116,9 @@ export class LoginComponent {
   public submit() {
     this.touched = signal(true);
     if (this.dialogMode === 'login') {
-      this.login();
+      this.login().then(r => r);
     } else {
-      this.register();
+      this.register().then(r => r);
     }
   }
 }

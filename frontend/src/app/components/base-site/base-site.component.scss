@@ -1,3 +1,5 @@
+@import '../../../../src/styles';
+
 #wholePage {
   height: 100vh;
   width: 100vw;
@@ -36,12 +38,12 @@
 
       .headerButton {
         background-color: transparent;
-        border-radius: 10px;
+        border-radius: 8px;
       }
 
       #loginButton {
-        border: 1.5px solid #3078F2 !important;
-        border-radius: 10px;
+        border: 1.5px solid $primary_blue !important;
+        border-radius: 8px;
       }
     }
   }

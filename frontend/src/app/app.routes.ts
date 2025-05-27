@@ -1,12 +1,11 @@
-import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { loginGuard } from './guards/login.guard';
-import { BrowseComponent } from './components/browse/browse.component';
-import { CreateComponent } from './components/create/create.component';
+import {Routes} from '@angular/router';
+import {LoginComponent} from './components/login/login.component';
+import {loginGuard} from './guards/login.guard';
+import {BrowseComponent} from './components/browse/browse.component';
+import {CreateComponent} from './components/create/create.component';
 import {BaseSiteComponent} from './components/base-site/base-site.component';
 import {CreditsComponent} from './components/credits/credits.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import {ProfileComponent} from './components/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -20,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'home',
     canActivate: [loginGuard],
-    component: HomeComponent,
+    component: BaseSiteComponent,
   },
   {
     path: 'create',

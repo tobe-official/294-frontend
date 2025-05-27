@@ -5,20 +5,24 @@
         </div>
         <div id="buttonRow">
             <button class="headerButton" mat-flat-button
-                    (click)="redirect()">{{ "header.homeButtonLabel" | translate }}
+                    (click)="redirect( 'home', false)">{{ "header.homeButtonLabel" | translate }}
             </button>
             <button class="headerButton" mat-flat-button
-                    (click)="redirect()">{{ "header.browseButtonLabel" | translate }}
+                    (click)="redirect('browse', false)">{{ "header.browseButtonLabel" | translate }}
             </button>
             <button class="headerButton" mat-flat-button
-                    (click)="redirect()">{{ "header.creditsButtonLabel" | translate }}
+                    (click)="redirect( 'credits', false)">{{ "header.creditsButtonLabel" | translate }}
             </button>
             <button id="loginButton" mat-stroked-button color="#123456"
-                    (click)="redirect()">{{ "header.loginButtonLabel" | translate }}
+                    (click)="redirect('', isLoggedIn())">
+                {{ loginButtonLabel | translate }}
             </button>
         </div>
     </mat-toolbar>
     <div id="restOfPage">
         <h4>Rest works!</h4>
+        @if (isLoggedIn()) {
+            <button mat-raised-button (click)="redirect('create', false)">create</button>
+        }
     </div>
 </div>
