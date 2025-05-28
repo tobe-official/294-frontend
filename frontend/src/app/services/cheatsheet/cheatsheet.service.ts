@@ -9,10 +9,11 @@ export class CheatsheetService {
   private pb = new PocketBase('http://localhost:8090');
   constructor() {}
 
-  public create(cheatsheet: Cheatsheet) {
+  public async create(cheatsheet: Cheatsheet): Promise<RecordModel | null> {
     if (cheatsheet) {
-      this.pb.collection('cheatsheets').create(cheatsheet);
+      return this.pb.collection('cheatsheets').create(cheatsheet);
     }
+    throw new Error('invalid cheatsheet');
   }
   public getAllCheatsheets(): Promise<RecordModel[]> {
     return this.pb.collection('cheatsheets').getFullList();

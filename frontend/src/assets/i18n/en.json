@@ -26,9 +26,12 @@
   "create": {
     "form": {
       "title": "title",
+      "titleRequired": "title is required",
       "description": "description",
+      "descriptionRequired": "description is required",
       "thumbnailUrl": "url for thumbnail image",
-      "pdfUrl": "url to the cheatsheet"
+      "pdfUrl": "url to the cheatsheet",
+      "pdfUrlRequired": "pdf url is required"
     },
     "back": "back"
   },
@@ -38,5 +41,14 @@
   "profile": {
     "createLabel": "member since",
     "creditsLabel": "credits"
+  },
+  "credits": {
+    "leaderboard": {
+      "title": "Credit Leaderboard",
+      "noUsers": "no users found",
+      "rank": "Rank",
+      "user": "User",
+      "credits": "Credits"
+    }
   }
 }
