@@ -46,4 +46,11 @@ export class AuthService {
   public async getUserById(userId: string): Promise<RecordModel> {
     return await this.pb.collection('users').getOne(userId);
   }
+
+  public getUsersByCredits() {
+    return this.pb.collection('users').getList(1, 10, {
+      fields: 'name, credits',
+      sort: '-credits',
+    });
+  }
 }
