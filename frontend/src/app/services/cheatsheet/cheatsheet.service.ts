@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Cheatsheet} from '../../models/cheatsheet';
-import PocketBase, {RecordModel} from 'pocketbase';
+import { Injectable } from '@angular/core';
+import { Cheatsheet } from '../../models/cheatsheet';
+import PocketBase, { RecordModel } from 'pocketbase';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +8,7 @@ import PocketBase, {RecordModel} from 'pocketbase';
 export class CheatsheetService {
   private pb = new PocketBase('http://localhost:8090');
 
-  constructor() {
-  }
+  constructor() {}
 
   public create(cheatsheet: Cheatsheet) {
     if (cheatsheet) {
