@@ -5,4 +5,5 @@ export interface Cheatsheet {
   // RELATION_RECORD_ID
   uploader: string | undefined;
   thumbnailUrl: string;
+  stars: number;
 }

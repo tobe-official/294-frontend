@@ -52,6 +52,7 @@ export class CreateComponent {
     private authService: AuthService,
     private router: Router,
   ) {}
+
   public redirect(location: 'home') {
     redirectTo(location, this.router);
   }
@@ -66,6 +67,7 @@ export class CreateComponent {
         pdfUrl: rawValue.pdfUrl || '',
         thumbnailUrl: rawValue.thumbnailUrl || '',
         uploader: this.authService.getLoggedInUser()?.id,
+        stars: 0,
       };
       this.cheatsheetService.create(cheatSheet).then((record) => {
         if (record) {

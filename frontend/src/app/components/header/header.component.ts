@@ -39,4 +39,6 @@ export class HeaderComponent {
       redirectTo('', this.router);
     });
   }
+
+  protected readonly redirectTo = redirectTo;
 }
