@@ -11,7 +11,7 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 
- 	_"backend/migrations" 
+	_ "backend/migrations" // Import migrations package for side effects
 )
 
 func main() {
