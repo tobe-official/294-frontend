@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import PocketBase, { ListResult, RecordModel } from 'pocketbase';
-import { Router } from '@angular/router';
-import { LoginUser } from '../../models/login-user';
-import { User } from '../../models/user';
-import { redirectTo } from '../../utils/router-functions';
+import {Injectable} from '@angular/core';
+import PocketBase, {ListResult, RecordModel} from 'pocketbase';
+import {Router} from '@angular/router';
+import {LoginUser} from '../../models/login-user';
+import {User} from '../../models/user';
+import {redirectTo} from '../../utils/router-functions';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,9 @@ import { redirectTo } from '../../utils/router-functions';
 export class AuthService {
   private pb = new PocketBase('http://localhost:8090');
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+  ) {}
 
   public async register(user: User) {
     if (user) {
@@ -52,5 +54,23 @@ export class AuthService {
       fields: 'name, credits',
       sort: '-credits',
     });
+  }
+
+  public async buyCheatsheet(id: string) {
+    const user = this.getLoggedInUser();
+    if (!user) return;
+
+    const currentCheatsheets = user['acquired_cheatsheets'] || [];
+    const updatedCheatsheets = [...currentCheatsheets, id];
+
+    await this.pb.collection('users').update(user.id, {
+      acquired_cheatsheets: updatedCheatsheets,
+    });
+  }
+
+  public hasLoggedInUserAcquiredCheatsheet(cheatsheetId: string) {
+    const user = this.getLoggedInUser();
+    if (!user || !user['acquired_cheatsheets']) return false;
+    return user['acquired_cheatsheets'].includes(cheatsheetId);
   }
 }

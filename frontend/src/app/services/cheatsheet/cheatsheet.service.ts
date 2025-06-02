@@ -26,4 +26,8 @@ export class CheatsheetService {
       sort: '-stars',
     });
   }
+
+  public async getCheatsheetById(id: string) {
+    return this.pb.collection('cheatsheets').getOne(id);
+  }
 }
