@@ -2,10 +2,16 @@
   <div id="loginCard">
     <div id="cardHeader">
       <h1 id="title">
-        {{ (dialogMode === 'login' ? 'login.title' : 'register.title') | translate }}
+        {{
+          (dialogMode === "login" ? "login.title" : "register.title")
+            | translate
+        }}
       </h1>
       <p id="subtitle">
-        {{ (dialogMode === 'login' ? 'login.subtitle' : 'register.subtitle') | translate }}
+        {{
+          (dialogMode === "login" ? "login.subtitle" : "register.subtitle")
+            | translate
+        }}
       </p>
     </div>
 
@@ -17,7 +23,6 @@
     }
 
     <form [formGroup]="form" id="loginForm">
-      <!-- Register Mode Fields -->
       @if (dialogMode === "register") {
         <div class="form-field">
           <label class="field-label" for="name">
@@ -31,16 +36,15 @@
             [formControl]="form.controls.name"
             [placeholder]="'login.form.namePlaceholder' | translate"
           />
-          @if (hasFieldError('name')) {
+          @if (hasFieldError("name")) {
             <div class="field-error">
               <span class="error-icon">⚠</span>
-              {{ getFieldError('name') | translate }}
+              {{ getFieldError("name") | translate }}
             </div>
           }
         </div>
       }
 
-      <!-- Email Field -->
       <div class="form-field">
         <label class="field-label" for="email">
           {{ "login.form.email" | translate }}
@@ -53,15 +57,14 @@
           [formControl]="form.controls.email"
           [placeholder]="'login.form.emailPlaceholder' | translate"
         />
-        @if (hasFieldError('email')) {
+        @if (hasFieldError("email")) {
           <div class="field-error">
             <span class="error-icon">⚠</span>
-            {{ getFieldError('email') | translate }}
+            {{ getFieldError("email") | translate }}
           </div>
         }
       </div>
 
-      <!-- Password Field -->
       <div class="form-field">
         <label class="field-label" for="password">
           {{ "login.form.password" | translate }}
@@ -74,15 +77,14 @@
           [formControl]="form.controls.password"
           [placeholder]="'login.form.passwordPlaceholder' | translate"
         />
-        @if (hasFieldError('password')) {
+        @if (hasFieldError("password")) {
           <div class="field-error">
             <span class="error-icon">⚠</span>
-            {{ getFieldError('password') | translate }}
+            {{ getFieldError("password") | translate }}
           </div>
         }
       </div>
 
-      <!-- Confirm Password Field (Register Mode) -->
       @if (dialogMode === "register") {
         <div class="form-field">
           <label class="field-label" for="confirmPassword">
@@ -96,16 +98,15 @@
             [formControl]="form.controls.confirmPassword"
             [placeholder]="'login.form.confirmPasswordPlaceholder' | translate"
           />
-          @if (hasFieldError('confirmPassword')) {
+          @if (hasFieldError("confirmPassword")) {
             <div class="field-error">
               <span class="error-icon">⚠</span>
-              {{ getFieldError('confirmPassword') | translate }}
+              {{ getFieldError("confirmPassword") | translate }}
             </div>
           }
         </div>
       }
 
-      <!-- Action Buttons -->
       <div id="actionButtons">
         <button
           type="button"
@@ -117,7 +118,12 @@
           @if (isLoading()) {
             <span class="loading-spinner"></span>
           }
-          <span>{{ submitTranslation() | translate }}</span>
+          <span>{{
+            (dialogMode === "login"
+              ? "login.form.submitLogin"
+              : "register.submitRegister"
+            ) | translate
+          }}</span>
         </button>
 
         <button
@@ -126,7 +132,12 @@
           [disabled]="isLoading()"
           (click)="toggleMode()"
         >
-          {{ createAccountTranslation() | translate }}
+          <span>{{
+            (dialogMode === "login"
+              ? "login.form.noAccount"
+              : "register.alreadyHaveAnAccount"
+            ) | translate
+          }}</span>
         </button>
       </div>
     </form>

@@ -1,26 +1,22 @@
-import {Component, computed, signal, Signal} from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {AuthService} from '../../services/auth/auth.service';
-import {TranslatePipe} from '@ngx-translate/core';
-import {Router} from '@angular/router';
-import {AppValues} from '../../appvalues';
-import {LoginUser} from '../../models/login-user';
-import {User} from '../../models/user';
-import {redirectTo} from '../../utils/router-functions';
-import {CommonModule} from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { AppValues } from '../../appvalues';
+import { LoginUser } from '../../models/login-user';
+import { User } from '../../models/user';
+import { redirectTo } from '../../utils/router-functions';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [
-    TranslatePipe,
-    ReactiveFormsModule,
-    CommonModule,
-  ],
+  imports: [TranslatePipe, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   standalone: true,
@@ -30,19 +26,10 @@ export class LoginComponent {
   public touched: Signal<boolean> = signal(false);
   public isLoading: Signal<boolean> = signal(false);
   public errorMessage: Signal<string> = signal('');
-  public submitTranslation: Signal<string> = computed(
-    () => this.dialogMode === 'login' ? 'login.form.submitLogin' : 'login.form.submitRegister'
-  );
-  public createAccountTranslation: Signal<string> = computed(
-    () => this.dialogMode === 'login' ? 'login.form.noAccount' : 'login.form.back'
-  );
 
   public form = new FormGroup({
     name: new FormControl<string>('', [Validators.required]),
-    email: new FormControl<string>('', [
-      Validators.required,
-      Validators.email
-    ]),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(8),
@@ -56,8 +43,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-  ) {
-  }
+  ) {}
 
   private async redirect() {
     redirectTo('home', this.router);
@@ -82,6 +68,7 @@ export class LoginComponent {
           this.errorMessage = signal('login.errors.invalidCredentials');
         }
       } catch (error) {
+        console.error(error);
         this.errorMessage = signal('login.errors.networkError');
       }
     } else {
@@ -98,7 +85,6 @@ export class LoginComponent {
     if (this.form.valid) {
       const rawValue = this.form.getRawValue();
 
-      // Check if passwords match
       if (rawValue.password !== rawValue.confirmPassword) {
         this.errorMessage = signal('login.errors.passwordsDoNotMatch');
         this.isLoading = signal(false);
@@ -123,6 +109,7 @@ export class LoginComponent {
           this.errorMessage = signal('login.errors.registrationFailed');
         }
       } catch (error) {
+        console.error(error);
         this.errorMessage = signal('login.errors.emailAlreadyExists');
       }
     } else {
@@ -142,9 +129,9 @@ export class LoginComponent {
   public submit() {
     this.touched = signal(true);
     if (this.dialogMode === 'login') {
-      this.login().then((r) => r);
+      this.login().then(() => {});
     } else {
-      this.register().then((r) => r);
+      this.register().then(() => {});
     }
   }
 

@@ -1,4 +1,3 @@
-// login.component.scss
 @import "../../../../src/styles";
 
 :host {
@@ -6,151 +5,93 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100%;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 1rem;
-}
-
-#wholePage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
+  background: #f5f7fa;
 }
 
 #loginCard {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
   width: 100%;
-  max-width: 480px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, $primary_blue, lighten($primary_blue, 20%));
-  }
+  max-width: 400px;
 }
 
 #cardHeader {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 
   #title {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 600;
     color: #1a202c;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
   }
 
   #subtitle {
-    font-size: 1rem;
-    color: #718096;
-    margin: 0;
-    font-weight: 400;
+    font-size: 0.95rem;
+    color: #4a5568;
   }
 }
 
 .error-banner {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: linear-gradient(135deg, #fed7d7, #feb2b2);
+  background: #ffe0e0;
   border: 1px solid #fc8181;
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  animation: slideIn 0.3s ease-out;
-
-  .error-icon {
-    font-size: 1.25rem;
-    color: #c53030;
-    font-weight: bold;
-  }
-
-  .error-text {
-    color: #742a2a;
-    font-weight: 500;
-    flex: 1;
-  }
+  color: #b00020;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
 #loginForm {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .field-label {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 600;
+  margin-bottom: 0.25rem;
   color: #374151;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
 }
 
 .field-input {
-  padding: 0.875rem 1rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
   font-size: 1rem;
-  color: #1a202c;
   background: white;
-  transition: all 0.2s ease;
-  outline: none;
+  transition: border 0.2s ease;
 
   &::placeholder {
     color: #a0aec0;
   }
 
   &:focus {
+    outline: none;
     border-color: $primary_blue;
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-    transform: translateY(-1px);
-  }
-
-  &:hover:not(:focus) {
-    border-color: #cbd5e0;
   }
 
   &.error {
     border-color: #fc8181;
-    background: #fffafa;
-
-    &:focus {
-      border-color: #e53e3e;
-      box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
-    }
+    background: #fff5f5;
   }
 }
 
 .field-error {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 0.8rem;
   color: #c53030;
-  font-size: 0.875rem;
-  font-weight: 500;
-  animation: slideIn 0.2s ease-out;
-
-  .error-icon {
-    font-size: 1rem;
-  }
+  margin-top: 0.25rem;
 }
 
 #actionButtons {
@@ -160,59 +101,42 @@
   margin-top: 1rem;
 }
 
-.primary-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, $primary_blue, darken($primary_blue, 10%));
-  color: white;
-  border: none;
-  border-radius: 12px;
+.primary-button,
+.secondary-button {
+  padding: 0.75rem;
   font-size: 1rem;
   font-weight: 600;
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
-  outline: none;
-  position: relative;
-  overflow: hidden;
+  transition: background 0.2s ease;
+}
+
+.primary-button {
+  background: $primary_blue;
+  color: white;
 
   &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(0);
+    background: darken($primary_blue, 5%);
   }
 
   &:disabled {
-    opacity: 0.7;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
   &.loading {
     pointer-events: none;
+    opacity: 0.8;
   }
 }
 
 .secondary-button {
-  padding: 0.875rem 1.5rem;
-  background: transparent;
-  color: #4a5568;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  outline: none;
+  background: #edf2f7;
+  color: #2d3748;
 
   &:hover:not(:disabled) {
-    background: #f7fafc;
-    border-color: #cbd5e0;
-    color: $primary_blue;
+    background: #e2e8f0;
   }
 
   &:disabled {
@@ -225,81 +149,33 @@
   width: 1rem;
   height: 1rem;
   border: 2px solid transparent;
-  border-top: 2px solid currentColor;
+  border-top-color: white;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-// Animations
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-// Mobile responsiveness
-@media (max-width: 640px) {
-  :host {
-    padding: 1rem 0.5rem;
-    min-height: 100vh;
-  }
-
+// Mobile adjustments
+@media (max-width: 480px) {
   #loginCard {
-    padding: 2rem 1.5rem;
-    border-radius: 12px;
+    padding: 1.5rem;
   }
 
-  #cardHeader {
-    margin-bottom: 1.5rem;
-
-    #title {
-      font-size: 1.75rem;
-    }
-
-    #subtitle {
-      font-size: 0.9rem;
-    }
+  #title {
+    font-size: 1.5rem;
   }
 
-  #loginForm {
-    gap: 1.25rem;
+  #subtitle {
+    font-size: 0.85rem;
+  }
+
+  .primary-button,
+  .secondary-button {
+    font-size: 0.95rem;
+    padding: 0.65rem;
   }
 
   .field-input {
-    padding: 0.75rem;
-    font-size: 1rem;
-  }
-
-  .primary-button, .secondary-button {
-    padding: 0.875rem 1.25rem;
+    padding: 0.65rem;
     font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  #loginCard {
-    padding: 1.5rem 1rem;
-  }
-
-  #cardHeader {
-    #title {
-      font-size: 1.5rem;
-    }
-  }
-
-  .error-banner {
-    padding: 0.875rem;
-    gap: 0.5rem;
   }
 }

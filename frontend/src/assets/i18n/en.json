@@ -1,19 +1,38 @@
 {
   "login": {
+    "errors": {
+      "invalidCredentials": "Invalid email or password.",
+      "networkError": "A network error occurred. Please try again.",
+      "registrationFailed": "Registration failed. Please try again.",
+      "emailAlreadyExists": "This email is already registered.",
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "validationFailed": "Please fill in all required fields correctly."
+    },
+    "title": "Welcome back",
+    "subtitle": "Please enter your credentials to continue",
     "form": {
       "email": "Email",
-      "emailRequired": "email is required",
+      "emailPlaceholder": "Enter your email",
+      "emailRequired": "Email is required",
       "name": "Name",
-      "nameRequired": "name is required",
+      "namePlaceholder": "Enter your name",
+      "nameRequired": "Name is required",
       "password": "Password",
-      "passwordRequired": "password is required",
+      "passwordPlaceholder": "Enter your password",
+      "passwordRequired": "Password is required",
       "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Repeat your password",
       "confirmPasswordRequired": "Confirm Password is required",
       "submitLogin": "Login",
-      "submitRegister": "Register",
       "noAccount": "No account?",
-      "back": "back"
+      "back": "Back"
     }
+  },
+  "register": {
+    "title": "Create an account",
+    "subtitle": "Register now to get started",
+    "alreadyHaveAnAccount": "Already have a Account?",
+    "submitRegister": "Register"
   },
   "header": {
     "homeButtonLabel": "Home",
