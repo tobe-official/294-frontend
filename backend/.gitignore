@@ -1,8 +1,6 @@
 # PocketBase runtime database
 pb_data/
 
-go.sum
-
 # Go build artifacts
 pocketbase
 *.exe
