@@ -6,7 +6,9 @@
       "registrationFailed": "Registration failed. Please try again.",
       "emailAlreadyExists": "This email is already registered.",
       "passwordsDoNotMatch": "Passwords do not match.",
-      "validationFailed": "Please fill in all required fields correctly."
+      "validationFailed": "Please fill in all required fields correctly.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters long."
     },
     "title": "Welcome back",
     "subtitle": "Please enter your credentials to continue",

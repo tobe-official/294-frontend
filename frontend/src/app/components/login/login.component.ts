@@ -29,7 +29,10 @@ export class LoginComponent {
 
   public form = new FormGroup({
     name: new FormControl<string>('', [Validators.required]),
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    email: new FormControl<string>('', [
+      Validators.required,
+      Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
+    ]),
     password: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(8),
@@ -142,11 +145,11 @@ export class LoginComponent {
     if (field.errors['required']) {
       return `login.form.${fieldName}Required`;
     }
-    if (field.errors['email']) {
-      return 'login.form.emailInvalid';
+    if (field.errors['pattern']) {
+      return 'login.errors.emailInvalid';
     }
     if (field.errors['minlength']) {
-      return 'login.form.passwordTooShort';
+      return 'login.errors.passwordTooShort';
     }
     return '';
   }
