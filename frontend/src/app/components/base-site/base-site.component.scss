@@ -282,29 +282,3 @@
     }
   }
 }
-
-.mobile-search {
-  width: 100%;
-  max-width: 400px;
-  margin: 1rem 0;
-
-  input {
-    width: 88%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    background-color: #f8f9fa;
-    text-align: center;
-
-    &:focus {
-      outline: none;
-      border-color: $primary_blue;
-      background-color: white;
-    }
-
-    &::placeholder {
-      color: #999;
-    }
-  }
-}

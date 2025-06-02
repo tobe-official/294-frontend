@@ -8,12 +8,12 @@ import { HeaderComponent } from '../header/header.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RecordModel } from 'pocketbase';
 import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
-import { NgOptimizedImage } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-base-site',
   standalone: true,
-  imports: [MatButton, HeaderComponent, TranslatePipe, NgOptimizedImage],
+  imports: [MatButton, HeaderComponent, TranslatePipe, ReactiveFormsModule],
   templateUrl: './base-site.component.html',
   styleUrl: './base-site.component.scss',
 })
