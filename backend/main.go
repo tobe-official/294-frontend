@@ -11,7 +11,7 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 
-	_ "backend/migrations" // import your migrations package to register migrations
+	_ "backend/migrations" // Import migrations package for side effects
 )
 
 func main() {
@@ -25,7 +25,6 @@ func main() {
 
 	})
 
-	// loosely check if it was executed using "go run"
 	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
 
 	migratecmd.MustRegister(app, app.RootCmd, migratecmd.Config{
