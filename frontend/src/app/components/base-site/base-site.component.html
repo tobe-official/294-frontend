@@ -1,9 +1,71 @@
 <div id="wholePage">
   <app-header></app-header>
   <div id="restOfPage">
-    <h4>Rest works!</h4>
-    @if (isLoggedIn) {
-      <button mat-raised-button (click)="redirect('create')">create</button>
-    }
+    <div id="titleAndDescriptionDiv">
+      @if (isLoggedIn) {
+        <h1 class="title">
+          {{ "baseSite.welcomeTitleLoginPt1" | translate }}
+          {{ user["name"] + ", "
+          }}{{ "baseSite.welcomeTitleLoginPt2" | translate }}
+        </h1>
+        <h3 class="description">
+          {{ "baseSite.descriptionLogin" | translate }}
+        </h3>
+      } @else {
+        <h1 class="title">{{ "baseSite.welcomeTitleLogout" | translate }}</h1>
+        <h3 class="description">
+          {{ "baseSite.descriptionLogout" | translate }}
+        </h3>
+      }
+
+      <button id="uploadButton" mat-flat-button (click)="redirect('create')">
+        {{ "baseSite.uploadButtonLabel" | translate }}
+      </button>
+
+      <!-- Mobile search input (only show on mobile) -->
+      @if (window.innerWidth <= 768) {
+        <div class="mobile-search">
+          <input
+            type="text"
+            placeholder="{{ 'baseSite.searchPlaceholder' | translate }}"
+          />
+        </div>
+      }
+    </div>
+
+    <div id="bottom">
+      <h4 id="popularCheatSheetsTxt">
+        {{ "baseSite.popularCheatSheetsTxt" | translate }}
+      </h4>
+
+      @if (topCheatSheets.length !== 0) {
+        <div id="allCards">
+          @for (sheet of topCheatSheets; track $index) {
+            <div class="card" (click)="redirect('browse')">
+              @if (showImages) {
+                <img
+                  src="{{ sheet['thumbnailUrl'] }}"
+                  alt="{{ sheet['description'] }}"
+                  loading="lazy"
+                />
+              }
+              <h2>{{ sheet["title"] }}</h2>
+              <p>{{ sheet["description"] }}</p>
+              <p>⭐ {{ sheet["stars"] }}</p>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="no-sheets-message">
+          <h2>{{ "baseSite.noSheetsFound" | translate }}</h2>
+        </div>
+      }
+
+      <div id="viewAllButtonDiv">
+        <button id="viewAllButton" mat-flat-button (click)="redirect('browse')">
+          {{ "baseSite.viewAllButtonLabel" | translate }}
+        </button>
+      </div>
+    </div>
   </div>
 </div>

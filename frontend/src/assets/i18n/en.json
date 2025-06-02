@@ -50,5 +50,17 @@
       "user": "User",
       "credits": "Credits"
     }
+  },
+  "baseSite": {
+    "welcomeTitleLogout": "Share and download cheat sheets",
+    "welcomeTitleLoginPt1": "Hey",
+    "welcomeTitleLoginPt2": "need a cheat sheet?",
+    "descriptionLogout": "Browse high-quality PDF cheat sheets, Share your own, rate others, and earn credits.",
+    "descriptionLogin": "Here are the newest cheat sheets for you, don't forget to rate them.",
+    "uploadButtonLabel": "Upload",
+    "popularCheatSheetsTxt": "Popular Cheat Sheets",
+    "viewAllButtonLabel": "View all",
+    "noSheetsFound": "No sheets found",
+    "searchPlaceholder": "Search a cheat sheet"
   }
 }
