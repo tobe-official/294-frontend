@@ -1,38 +1,52 @@
-<app-header></app-header>
-<div>
-  @if (!cheatsheets.length) {
-    <h1>{{ "browse.noCheatsheets" | translate }}</h1>
-  }
+<div id="wholePage">
+  <app-header></app-header>
 
-  <div class="search">
-    <input
-      [formControl]="form.controls.search"
-      type="text"
-      placeholder="{{ 'baseSite.searchPlaceholder' | translate }}"
-    />
-  </div>
-  @for (cheatsheet of cheatsheets; track cheatsheet.id) {
-    <mat-card class="cheatsheet-card">
-      <div class="card-content">
-        <img
-          src="{{ cheatsheet['thumbnailUrl'] }}"
-          alt="image error"
-          class="preview-image"
-        />
-        <div class="details">
-          <h2>{{ cheatsheet["title"] }}</h2>
-          <p>
-            {{ cheatsheet["description"] }}
-          </p>
-          <div class="meta">
-            <mat-icon>person</mat-icon>
-            <!--            TODO: username display-->
-            <span>{{ "user" }}</span>
-            <mat-icon>calendar_today</mat-icon>
-            <span>{{ cheatsheet["createdAt"] | date: "dd.MM.yyyy" }}</span>
-          </div>
+  <div id="restOfPage">
+    <div class="search">
+      <input
+        [formControl]="form.controls.search"
+        type="text"
+        placeholder="{{ 'baseSite.searchPlaceholder' | translate }}"
+      />
+    </div>
+
+    <div id="cardPart">
+      @if (cheatsheets.length) {
+        <div id="allCards">
+          @for (sheet of cheatsheets; track $index) {
+            <div class="card" (click)="redirect('home')">
+              @if (showImages) {
+                <img
+                  [src]="sheet['thumbnailUrl']"
+                  [alt]="sheet['description']"
+                  loading="lazy"
+                />
+              }
+
+              <h2>{{ sheet["title"] }}</h2>
+              <p>{{ sheet["description"] }}</p>
+
+              <div class="row">
+                <mat-icon>person</mat-icon>
+                <div class="spacer"></div>
+                <p>{{ "user" }}</p>
+              </div>
+
+              <div class="row">
+                <mat-icon>calendar_today</mat-icon>
+                <div class="spacer"></div>
+                <p>{{ sheet["createdAt"] | date: "dd.MM.yyyy" }} 10.05.2008</p>
+              </div>
+
+              <p class="stars">⭐ {{ sheet["stars"] }}</p>
+            </div>
+          }
         </div>
-      </div>
-    </mat-card>
-  }
+      } @else {
+        <div class="no-sheets-message">
+          <h2>{{ "baseSite.noSheetsFound" | translate }}</h2>
+        </div>
+      }
+    </div>
+  </div>
 </div>

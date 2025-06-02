@@ -80,8 +80,4 @@ export class BaseSiteComponent implements OnInit, OnDestroy {
   public redirect(location: RouteLocations): void {
     redirectTo(this.isLoggedIn ? location : 'login', this.router);
   }
-
-  public get window(): Window | undefined {
-    return this.isBrowser ? window : undefined;
-  }
 }
