@@ -5,7 +5,7 @@ import {
   Inject,
   PLATFORM_ID,
 } from '@angular/core';
-import {isPlatformBrowser, NgOptimizedImage} from '@angular/common';
+import {isPlatformBrowser} from '@angular/common';
 import {MatButton} from '@angular/material/button';
 import {Router} from '@angular/router';
 import {redirectTo} from '../../utils/router-functions';
@@ -25,7 +25,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     HeaderComponent,
     TranslatePipe,
     ReactiveFormsModule,
-    NgOptimizedImage,
   ],
   templateUrl: './base-site.component.html',
   styleUrl: './base-site.component.scss',
