@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cheatsheet } from '../../models/cheatsheet';
-import PocketBase, { RecordModel } from 'pocketbase';
+import PocketBase, { ListResult, RecordModel } from 'pocketbase';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +21,9 @@ export class CheatsheetService {
     return this.pb.collection('cheatsheets').getFullList();
   }
 
-  public async getTopFourCheatSheets(): Promise<RecordModel[]> {
-    const fullList = await this.getAllCheatsheets();
-
-    return fullList
-      .sort((a, b) => (b['stars'] ?? 0) - (a['stars'] ?? 0))
-      .slice(0, 4);
+  public async getTopFourCheatSheets(): Promise<ListResult<RecordModel>> {
+    return this.pb.collection('cheatsheets').getList(1, 4, {
+      sort: '-stars',
+    });
   }
 }
