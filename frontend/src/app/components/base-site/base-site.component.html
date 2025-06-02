@@ -21,15 +21,6 @@
       <button id="uploadButton" mat-flat-button (click)="redirect('create')">
         {{ "baseSite.uploadButtonLabel" | translate }}
       </button>
-
-      @if (window.innerWidth <= 768) {
-        <div class="mobile-search">
-          <input
-            type="text"
-            placeholder="{{ 'baseSite.searchPlaceholder' | translate }}"
-          />
-        </div>
-      }
     </div>
 
     <div id="bottom">
