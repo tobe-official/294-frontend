@@ -59,6 +59,7 @@ export class BrowseComponent implements OnInit {
       this.allCheatsheets = cheatsheets;
       this.sortByStars();
 
+      // Apply search filter with debounce
       this.form
         .get('search')
         ?.valueChanges.pipe(debounceTime(300))
@@ -74,33 +75,46 @@ export class BrowseComponent implements OnInit {
     });
   }
 
-  private filterCheatsheets(searchTerm: string): void {
+  private filterCheatsheets(searchTerm: string) {
     if (!searchTerm.trim()) {
-      this.sortByStars();
+      this.cheatsheets = [...this.allCheatsheets];
       return;
     }
 
-    const term = searchTerm.toLowerCase();
+    searchTerm = searchTerm.toLowerCase();
 
-    const scored = this.allCheatsheets.map((sheet) => {
-      const title = String(sheet['title'] || '').toLowerCase();
-      const desc = String(sheet['description'] || '').toLowerCase();
-      const score = Math.min(
-        levenshteinEditDistance(term, title),
-        levenshteinEditDistance(term, desc),
+    const scoredCheatsheets = this.allCheatsheets.map((sheet) => {
+      const title = String(sheet['title']).toLowerCase();
+      const description = String(sheet['description']).toLowerCase();
+
+      // Get minimum Levenshtein distance
+      const titleDistance = levenshteinEditDistance(searchTerm, title);
+      const descriptionDistance = levenshteinEditDistance(
+        searchTerm,
+        description,
       );
+
+      // Direct matches get priority
+      const containsMatch =
+        title.includes(searchTerm) || description.includes(searchTerm);
+
       return {
         cheatsheet: sheet,
-        score: title.includes(term) || desc.includes(term) ? -1 : score,
+        score: containsMatch
+          ? -1
+          : Math.min(titleDistance, descriptionDistance),
       };
     });
 
-    const threshold = Math.max(3, Math.floor(term.length * 0.7));
-    scored.sort((a, b) => a.score - b.score);
+    // Sort by score (lower is better)
+    scoredCheatsheets.sort((a, b) => a.score - b.score);
 
-    this.cheatsheets = scored
-      .filter((x) => x.score === -1 || x.score <= threshold)
-      .map((x) => x.cheatsheet);
+    // Filter out irrelevant results
+    const threshold = Math.max(3, Math.floor(searchTerm.length * 0.7));
+
+    this.cheatsheets = scoredCheatsheets
+      .filter((item) => item.score === -1 || item.score <= threshold)
+      .map((item) => item.cheatsheet);
   }
 
   private updateShowImages(): void {
