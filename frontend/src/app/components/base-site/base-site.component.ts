@@ -42,57 +42,9 @@ export class BaseSiteComponent {
       this.showImages = window.innerWidth > this.maxWidth;
     });
 
-    // Dummy data for cards until real data is here
-    this.topCheatSheets = [
-      {
-        id: '1',
-        collectionId: '',
-        collectionName: '',
-        title: 'Physics Summary',
-        description: 'All formulas at a glance',
-        thumbnailUrl:
-          'https://website-assets.studocu.com/img/document_thumbnails/e38561f1b1db6796e9870f64a81caf58/thumb_1200_848.png',
-        stars: 4,
-        pdfUrl: '',
-        uploader: 'user1',
-      },
-      {
-        id: '2',
-        collectionId: '',
-        collectionName: '',
-        title: 'Linear Algebra',
-        description: 'Matrices, vectors & more',
-        thumbnailUrl:
-          'https://data.templateroller.com/pdf_docs_html/2638/26385/2638595/page_1_thumb_950.png',
-        stars: 3,
-        pdfUrl: '',
-        uploader: 'user2',
-      },
-      {
-        id: '3',
-        collectionId: '',
-        collectionName: '',
-        title: 'Python Cheat Sheet',
-        description: 'Most used syntax & functions',
-        thumbnailUrl:
-          'https://www.datasciencecentral.com/wp-content/uploads/2021/10/YTPN7r6.png',
-        stars: 5,
-        pdfUrl: '',
-        uploader: 'user3',
-      },
-      {
-        id: '4',
-        collectionId: '',
-        collectionName: '',
-        title: 'Java cheat sheet',
-        description: 'Cheat sheet about Java',
-        thumbnailUrl:
-          'https://rukminim2.flixcart.com/image/850/1000/xif0q/poster/9/4/n/large-java-wall-chart-fundamental-cheat-sheet-java-chart-original-imah52f9rjfhrjx7.jpeg?q=90&crop=false',
-        stars: 6,
-        pdfUrl: '',
-        uploader: 'user4',
-      },
-    ] as RecordModel[];
+    this.cheatSheetService.getTopFourCheatSheets().then((cheatsheets) => {
+      this.topCheatSheets = cheatsheets.items;
+    });
   }
 
   public get isLoggedIn(): boolean {
