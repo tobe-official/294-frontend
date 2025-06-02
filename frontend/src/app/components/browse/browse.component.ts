@@ -1,18 +1,18 @@
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {DatePipe, isPlatformBrowser} from '@angular/common';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {debounceTime} from 'rxjs';
-import {Router} from '@angular/router';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
+import { Router } from '@angular/router';
 
-import {HeaderComponent} from '../header/header.component';
-import {MatIcon} from '@angular/material/icon';
-import {TranslatePipe} from '@ngx-translate/core';
+import { HeaderComponent } from '../header/header.component';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
 
-import {CheatsheetService} from '../../services/cheatsheet/cheatsheet.service';
-import {RecordModel} from 'pocketbase';
-import {RouteLocations} from '../../models/route-locations';
-import {redirectTo} from '../../utils/router-functions';
-import {levenshteinEditDistance} from 'levenshtein-edit-distance';
+import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
+import { RecordModel } from 'pocketbase';
+import { RouteLocations } from '../../models/route-locations';
+import { redirectTo } from '../../utils/router-functions';
+import { levenshteinEditDistance } from 'levenshtein-edit-distance';
 
 @Component({
   selector: 'app-browse',
@@ -59,8 +59,9 @@ export class BrowseComponent implements OnInit {
       this.allCheatsheets = cheatsheets;
       this.sortByStars();
 
-      this.form.get('search')?.valueChanges
-        .pipe(debounceTime(300))
+      this.form
+        .get('search')
+        ?.valueChanges.pipe(debounceTime(300))
         .subscribe((searchTerm) => this.filterCheatsheets(searchTerm || ''));
     });
   }
@@ -86,7 +87,7 @@ export class BrowseComponent implements OnInit {
       const desc = String(sheet['description'] || '').toLowerCase();
       const score = Math.min(
         levenshteinEditDistance(term, title),
-        levenshteinEditDistance(term, desc)
+        levenshteinEditDistance(term, desc),
       );
       return {
         cheatsheet: sheet,
