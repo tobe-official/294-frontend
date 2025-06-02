@@ -1,4 +1,4 @@
-import {Component, Signal, signal} from '@angular/core';
+import { Component, Signal, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,14 +12,14 @@ import {
   MatInput,
   MatLabel,
 } from '@angular/material/input';
-import {TranslatePipe} from '@ngx-translate/core';
-import {redirectTo} from '../../utils/router-functions';
-import {Router} from '@angular/router';
-import {MatButton} from '@angular/material/button';
-import {AuthService} from '../../services/auth/auth.service';
-import {CheatsheetService} from '../../services/cheatsheet/cheatsheet.service';
-import {HeaderComponent} from '../header/header.component';
-import {Cheatsheet} from '../../models/cheatsheet';
+import { TranslatePipe } from '@ngx-translate/core';
+import { redirectTo } from '../../utils/router-functions';
+import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
+import { AuthService } from '../../services/auth/auth.service';
+import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
+import { HeaderComponent } from '../header/header.component';
+import { Cheatsheet } from '../../models/cheatsheet';
 
 @Component({
   selector: 'app-create',
@@ -51,8 +51,7 @@ export class CreateComponent {
     private cheatsheetService: CheatsheetService,
     private authService: AuthService,
     private router: Router,
-  ) {
-  }
+  ) {}
 
   public redirect(location: 'home') {
     redirectTo(location, this.router);

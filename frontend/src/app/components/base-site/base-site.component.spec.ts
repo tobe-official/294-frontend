@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {BaseSiteComponent} from './base-site.component';
-import {provideTranslateMock} from '../../utils/translate-tests.function.spec';
+import { BaseSiteComponent } from './base-site.component';
+import { provideTranslateMock } from '../../utils/translate-tests.function.spec';
 
 describe('BaseSiteComponent', () => {
   let component: BaseSiteComponent;

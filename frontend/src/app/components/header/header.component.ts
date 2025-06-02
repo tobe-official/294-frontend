@@ -1,18 +1,25 @@
-import {Component} from '@angular/core';
-import {MatToolbar} from '@angular/material/toolbar';
-import {MatButton} from '@angular/material/button';
-import {MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
-import {TranslatePipe} from '@ngx-translate/core';
-import {redirectTo} from '../../utils/router-functions';
-import {Router} from '@angular/router';
-import {RouteLocations} from '../../models/route-locations';
-import {AuthService} from '../../services/auth/auth.service';
-import {CommonModule} from '@angular/common';
+import { Component } from '@angular/core';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
+import { redirectTo } from '../../utils/router-functions';
+import { Router } from '@angular/router';
+import { RouteLocations } from '../../models/route-locations';
+import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [MatToolbar, MatButton, MatIconButton, MatIcon, TranslatePipe, CommonModule],
+  imports: [
+    MatToolbar,
+    MatButton,
+    MatIconButton,
+    MatIcon,
+    TranslatePipe,
+    CommonModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

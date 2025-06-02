@@ -5,8 +5,7 @@
       @if (isLoggedIn) {
         <h1 class="title">
           {{ "baseSite.welcomeTitleLoginPt1" | translate }}
-          {{
-            user["name"] + ", "
+          {{ user["name"] + ", "
           }}{{ "baseSite.welcomeTitleLoginPt2" | translate }}
         </h1>
         <h3 class="description">

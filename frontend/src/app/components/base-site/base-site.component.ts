@@ -5,27 +5,22 @@ import {
   Inject,
   PLATFORM_ID,
 } from '@angular/core';
-import {isPlatformBrowser} from '@angular/common';
-import {MatButton} from '@angular/material/button';
-import {Router} from '@angular/router';
-import {redirectTo} from '../../utils/router-functions';
-import {RouteLocations} from '../../models/route-locations';
-import {AuthService} from '../../services/auth/auth.service';
-import {HeaderComponent} from '../header/header.component';
-import {TranslatePipe} from '@ngx-translate/core';
-import {RecordModel} from 'pocketbase';
-import {CheatsheetService} from '../../services/cheatsheet/cheatsheet.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { redirectTo } from '../../utils/router-functions';
+import { RouteLocations } from '../../models/route-locations';
+import { AuthService } from '../../services/auth/auth.service';
+import { HeaderComponent } from '../header/header.component';
+import { TranslatePipe } from '@ngx-translate/core';
+import { RecordModel } from 'pocketbase';
+import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-base-site',
   standalone: true,
-  imports: [
-    MatButton,
-    HeaderComponent,
-    TranslatePipe,
-    ReactiveFormsModule,
-  ],
+  imports: [MatButton, HeaderComponent, TranslatePipe, ReactiveFormsModule],
   templateUrl: './base-site.component.html',
   styleUrl: './base-site.component.scss',
 })
@@ -49,7 +44,7 @@ export class BaseSiteComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private cheatSheetService: CheatsheetService,
-    @Inject(PLATFORM_ID) platformId: object
+    @Inject(PLATFORM_ID) platformId: object,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     const loggedInUser: RecordModel | null = this.authService.getLoggedInUser();

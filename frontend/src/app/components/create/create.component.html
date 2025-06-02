@@ -6,19 +6,23 @@
         <div>
           <mat-form-field>
             <mat-label>{{ "create.form.title" | translate }}</mat-label>
-            <input matInput [formControl]="form.controls.title"/>
+            <input matInput [formControl]="form.controls.title" />
             @if (form.controls.title.hasError("required") && this.touched()) {
-              <mat-error>{{ "create.form.titleRequired" | translate }}</mat-error>
+              <mat-error>{{
+                "create.form.titleRequired" | translate
+              }}</mat-error>
             }
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
             <mat-label>{{ "create.form.description" | translate }}</mat-label>
-            <input matInput [formControl]="form.controls.description"/>
-            @if (form.controls.description.hasError("required") && this.touched()) {
+            <input matInput [formControl]="form.controls.description" />
+            @if (
+              form.controls.description.hasError("required") && this.touched()
+            ) {
               <mat-error
-              >{{ "create.form.descriptionRequired" | translate }}
+                >{{ "create.form.descriptionRequired" | translate }}
               </mat-error>
             }
           </mat-form-field>
@@ -26,24 +30,28 @@
         <div>
           <mat-form-field>
             <mat-label>{{ "create.form.thumbnailUrl" | translate }}</mat-label>
-            <input matInput [formControl]="form.controls.thumbnailUrl"/>
+            <input matInput [formControl]="form.controls.thumbnailUrl" />
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
             <mat-label>{{ "create.form.pdfUrl" | translate }}</mat-label>
-            <input matInput [formControl]="form.controls.pdfUrl"/>
+            <input matInput [formControl]="form.controls.pdfUrl" />
             @if (form.controls.pdfUrl.hasError("required") && this.touched()) {
-              <mat-error>{{ "create.form.pdfUrlRequired" | translate }}</mat-error>
+              <mat-error>{{
+                "create.form.pdfUrlRequired" | translate
+              }}</mat-error>
             }
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
             <mat-label>{{ "create.form.pdfUrl" | translate }}</mat-label>
-            <input matInput [formControl]="form.controls.pdfUrl"/>
+            <input matInput [formControl]="form.controls.pdfUrl" />
             @if (form.controls.pdfUrl.hasError("required") && this.touched()) {
-              <mat-error>{{ "create.form.pdfUrlRequired" | translate }}</mat-error>
+              <mat-error>{{
+                "create.form.pdfUrlRequired" | translate
+              }}</mat-error>
             }
           </mat-form-field>
         </div>
