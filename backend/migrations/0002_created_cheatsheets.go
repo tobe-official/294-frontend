@@ -9,9 +9,6 @@ import (
 
 func init() {
 	m.Register(func(app core.App) error {
-		// --- Migration: Create/Update cheatsheets collection with open rules ---
-
-		// your existing JSON definition (with null rules)
 		jsonData := `{
 			"createRule": null,
 			"deleteRule": null,
@@ -95,6 +92,18 @@ func init() {
 				},
 				{
 					"hidden": false,
+					"id": "number9876543210",
+					"max": 10,
+					"min": 1,
+					"name": "stars",
+					"onlyInt": true,
+					"presentable": false,
+					"required": true,
+					"system": false,
+					"type": "number"
+				},
+				{
+					"hidden": false,
 					"id": "autodate2990389176",
 					"name": "created",
 					"onCreate": true,
@@ -124,26 +133,18 @@ func init() {
 			"viewRule": null
 		}`
 
-		// unmarshal into a new Collection struct
-		var collection core.Collection
+		collection := &core.Collection{}
 		if err := json.Unmarshal([]byte(jsonData), &collection); err != nil {
 			return err
 		}
 
-		// explicitly clear any rule guards (ensure fully open)
-		collection.CreateRule = nil
-		collection.UpdateRule = nil
-		collection.DeleteRule = nil
-		collection.ViewRule   = nil
-		collection.ListRule   = nil
-
-		return app.Save(&collection)
+		return app.Save(collection)
 	}, func(app core.App) error {
-		// --- Rollback: delete the cheatsheets collection ---
 		collection, err := app.FindCollectionByNameOrId("pbc_1722640318")
 		if err != nil {
 			return err
 		}
+
 		return app.Delete(collection)
 	})
 }
