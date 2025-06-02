@@ -1,51 +1,77 @@
-import { Component, OnInit } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { MatCard } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
-import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
-import { RecordModel } from 'pocketbase';
-import { DatePipe } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { HeaderComponent } from '../header/header.component';
+import { MatIcon } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
+
+import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
+import { RecordModel } from 'pocketbase';
+import { RouteLocations } from '../../models/route-locations';
+import { redirectTo } from '../../utils/router-functions';
 import { levenshteinEditDistance } from 'levenshtein-edit-distance';
 
 @Component({
   selector: 'app-browse',
+  standalone: true,
   imports: [
     HeaderComponent,
-    MatCard,
     MatIcon,
-    DatePipe,
     TranslatePipe,
     ReactiveFormsModule,
+    DatePipe,
   ],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss',
-  standalone: true,
 })
 export class BrowseComponent implements OnInit {
   public allCheatsheets: RecordModel[] = [];
   public cheatsheets: RecordModel[] = [];
+  public showImages: boolean = true;
 
   public form = new FormGroup({
     search: new FormControl<string>('', []),
   });
 
-  constructor(private cheatsheetService: CheatsheetService) {}
+  private readonly isBrowser: boolean;
+  private readonly maxWidth = 768;
+  private resizeListener?: () => void;
 
-  public ngOnInit() {
+  constructor(
+    private cheatsheetService: CheatsheetService,
+    private router: Router,
+    @Inject(PLATFORM_ID) platformId: object,
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  public ngOnInit(): void {
+    if (this.isBrowser) {
+      this.updateShowImages();
+      this.resizeListener = () => this.updateShowImages();
+      window.addEventListener('resize', this.resizeListener);
+    }
+
     this.cheatsheetService.getAllCheatsheets().then((cheatsheets) => {
       this.allCheatsheets = cheatsheets;
-      this.cheatsheets = [...cheatsheets];
+      this.sortByStars();
 
       // Apply search filter with debounce
       this.form
         .get('search')
         ?.valueChanges.pipe(debounceTime(300))
-        .subscribe((searchTerm) => {
-          this.filterCheatsheets(searchTerm || '');
-        });
+        .subscribe((searchTerm) => this.filterCheatsheets(searchTerm || ''));
+    });
+  }
+
+  private sortByStars(): void {
+    this.cheatsheets = [...this.allCheatsheets].sort((a, b) => {
+      const starsA = Number(a['stars'] || 0);
+      const starsB = Number(b['stars'] || 0);
+      return starsB - starsA;
     });
   }
 
@@ -89,5 +115,13 @@ export class BrowseComponent implements OnInit {
     this.cheatsheets = scoredCheatsheets
       .filter((item) => item.score === -1 || item.score <= threshold)
       .map((item) => item.cheatsheet);
+  }
+
+  private updateShowImages(): void {
+    this.showImages = this.isBrowser && window.innerWidth > this.maxWidth;
+  }
+
+  public redirect(location: RouteLocations): void {
+    redirectTo(location, this.router);
   }
 }
