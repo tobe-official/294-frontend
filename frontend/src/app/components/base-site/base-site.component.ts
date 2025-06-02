@@ -42,7 +42,7 @@ export class BaseSiteComponent {
       this.showImages = window.innerWidth > this.maxWidth;
     });
 
-    cheatSheetService.getTopFourCheatSheets().then((cheatsheets) => {
+    this.cheatSheetService.getTopFourCheatSheets().then((cheatsheets) => {
       this.topCheatSheets = cheatsheets.items;
     });
   }
