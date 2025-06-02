@@ -1,7 +1,7 @@
 FROM golang:1.24.3
 
 # Copy go.mod and go.sum
-COPY go.mod ./
+COPY go.mod go.sum ./
 
 # Download dependencies
 RUN go mod download
