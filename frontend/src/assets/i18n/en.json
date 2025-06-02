@@ -64,7 +64,7 @@
   "credits": {
     "leaderboard": {
       "title": "Credit Leaderboard",
-      "noUsers": "no users found",
+      "noUsers": "No users found",
       "rank": "Rank",
       "user": "User",
       "credits": "Credits"
