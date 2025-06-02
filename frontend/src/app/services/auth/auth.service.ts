@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import PocketBase, { RecordModel } from 'pocketbase';
+import PocketBase, { ListResult, RecordModel } from 'pocketbase';
 import { Router } from '@angular/router';
 import { LoginUser } from '../../models/login-user';
 import { User } from '../../models/user';
@@ -47,7 +47,7 @@ export class AuthService {
     return await this.pb.collection('users').getOne(userId);
   }
 
-  public getUsersByCredits() {
+  public getUsersByCredits(): Promise<ListResult<RecordModel>> {
     return this.pb.collection('users').getList(1, 10, {
       fields: 'name, credits',
       sort: '-credits',
