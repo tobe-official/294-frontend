@@ -1,91 +1,134 @@
-<form [formGroup]="form">
-  @if (dialogMode === "login") {
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "login.form.email" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.email" />
-        @if (
-          form.controls.confirmPassword.hasError("required") && this.touched()
-        ) {
-          <mat-error>{{ "login.form.emailRequired" | translate }}</mat-error>
-        }
-      </mat-form-field>
+<div id="wholePage">
+  <div id="loginCard">
+    <div id="cardHeader">
+      <h1 id="title">
+        {{ (dialogMode === 'login' ? 'login.title' : 'register.title') | translate }}
+      </h1>
+      <p id="subtitle">
+        {{ (dialogMode === 'login' ? 'login.subtitle' : 'register.subtitle') | translate }}
+      </p>
     </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "login.form.password" | translate }}</mat-label>
+
+    @if (errorMessage()) {
+      <div class="error-banner">
+        <div class="error-icon">⚠</div>
+        <span class="error-text">{{ errorMessage() | translate }}</span>
+      </div>
+    }
+
+    <form [formGroup]="form" id="loginForm">
+      <!-- Register Mode Fields -->
+      @if (dialogMode === "register") {
+        <div class="form-field">
+          <label class="field-label" for="name">
+            {{ "login.form.name" | translate }}
+          </label>
+          <input
+            id="name"
+            type="text"
+            class="field-input"
+            [class.error]="hasFieldError('name')"
+            [formControl]="form.controls.name"
+            [placeholder]="'login.form.namePlaceholder' | translate"
+          />
+          @if (hasFieldError('name')) {
+            <div class="field-error">
+              <span class="error-icon">⚠</span>
+              {{ getFieldError('name') | translate }}
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Email Field -->
+      <div class="form-field">
+        <label class="field-label" for="email">
+          {{ "login.form.email" | translate }}
+        </label>
         <input
-          matInput
+          id="email"
+          type="email"
+          class="field-input"
+          [class.error]="hasFieldError('email')"
+          [formControl]="form.controls.email"
+          [placeholder]="'login.form.emailPlaceholder' | translate"
+        />
+        @if (hasFieldError('email')) {
+          <div class="field-error">
+            <span class="error-icon">⚠</span>
+            {{ getFieldError('email') | translate }}
+          </div>
+        }
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-field">
+        <label class="field-label" for="password">
+          {{ "login.form.password" | translate }}
+        </label>
+        <input
+          id="password"
+          type="password"
+          class="field-input"
+          [class.error]="hasFieldError('password')"
           [formControl]="form.controls.password"
-          type="password"
+          [placeholder]="'login.form.passwordPlaceholder' | translate"
         />
-        @if (
-          form.controls.confirmPassword.hasError("required") && this.touched()
-        ) {
-          <mat-error>{{ "login.form.passwordRequired" | translate }}</mat-error>
+        @if (hasFieldError('password')) {
+          <div class="field-error">
+            <span class="error-icon">⚠</span>
+            {{ getFieldError('password') | translate }}
+          </div>
         }
-      </mat-form-field>
-    </div>
-  } @else {
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "login.form.name" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.name" />
-        @if (
-          form.controls.confirmPassword.hasError("required") && this.touched()
-        ) {
-          <mat-error>{{ "login.form.nameRequired" | translate }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "login.form.email" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.email" />
-        @if (
-          form.controls.confirmPassword.hasError("required") && this.touched()
-        ) {
-          <mat-error>{{ "login.form.emailRequired" | translate }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "login.form.password" | translate }}</mat-label>
-        <input
-          matInput
-          [formControl]="form.controls.password"
-          type="password"
-        />
-        @if (
-          form.controls.confirmPassword.hasError("required") && this.touched()
-        ) {
-          <mat-error>{{ "login.form.passwordRequired" | translate }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "login.form.confirmPassword" | translate }}</mat-label>
-        <input
-          [formControl]="form.controls.confirmPassword"
-          type="password"
-          matInput
-        />
-        @if (
-          form.controls.confirmPassword.hasError("required") && this.touched()
-        ) {
-          <mat-error>{{
-            "login.form.confirmPasswordRequired" | translate
-          }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-  }
-  <button mat-raised-button (click)="submit()">
-    {{ submitTranslation() | translate }}
-  </button>
-  <button mat-raised-button (click)="toggleMode()">
-    {{ createAccountTranslation() | translate }}
-  </button>
-</form>
+      </div>
+
+      <!-- Confirm Password Field (Register Mode) -->
+      @if (dialogMode === "register") {
+        <div class="form-field">
+          <label class="field-label" for="confirmPassword">
+            {{ "login.form.confirmPassword" | translate }}
+          </label>
+          <input
+            id="confirmPassword"
+            type="password"
+            class="field-input"
+            [class.error]="hasFieldError('confirmPassword')"
+            [formControl]="form.controls.confirmPassword"
+            [placeholder]="'login.form.confirmPasswordPlaceholder' | translate"
+          />
+          @if (hasFieldError('confirmPassword')) {
+            <div class="field-error">
+              <span class="error-icon">⚠</span>
+              {{ getFieldError('confirmPassword') | translate }}
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Action Buttons -->
+      <div id="actionButtons">
+        <button
+          type="button"
+          class="primary-button"
+          [class.loading]="isLoading()"
+          [disabled]="isLoading()"
+          (click)="submit()"
+        >
+          @if (isLoading()) {
+            <span class="loading-spinner"></span>
+          }
+          <span>{{ submitTranslation() | translate }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="secondary-button"
+          [disabled]="isLoading()"
+          (click)="toggleMode()"
+        >
+          {{ createAccountTranslation() | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
