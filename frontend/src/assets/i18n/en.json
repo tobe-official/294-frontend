@@ -60,8 +60,12 @@
     "noCheatsheets": "No cheatsheets found"
   },
   "profile": {
-    "createLabel": "member since",
-    "creditsLabel": "credits"
+    "joinedLabel": "member since",
+    "creditsLabel": "credits",
+    "noSheets": "No sheets created yet",
+    "createFirstSheet": "Create your first cheat sheet!",
+    "mySheets": "My Cheat Sheets",
+    "sheetsLabel": "Sheets"
   },
   "credits": {
     "leaderboard": {

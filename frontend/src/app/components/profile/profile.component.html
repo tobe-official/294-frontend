@@ -1,19 +1,67 @@
-<app-header></app-header>
-<div class="profile-wrapper">
-  <div class="profile-card">
-    <img [src]="user['avatarUrl']" alt="no image" class="avatar" />
+<div id="wholePage">
+  <app-header></app-header>
+  <div id="restOfPage">
+    <div id="profileContent">
+      <div id="titleAndDescriptionDiv">
+        <h1 class="title">{{ user["name"] }}</h1>
+        <h3 class="description">{{ user["email"] }}</h3>
 
-    <h2>{{ user["name"] }}</h2>
-    <p>{{ user["email"] }}</p>
-
-    <div class="stats">
-      <div>
-        <div>{{ user["credits"] }}</div>
-        <div>{{ "profile.creditsLabel" | translate }}</div>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-value">{{ user["credits"] || 0 }}</span>
+            <span class="stat-label">{{
+              "profile.creditsLabel" | translate
+            }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">{{ userCheatsheets.length }}</span>
+            <span class="stat-label">{{
+              "profile.sheetsLabel" | translate
+            }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">{{
+              user["created"] | date: "MMM yyyy"
+            }}</span>
+            <span class="stat-label">{{
+              "profile.joinedLabel" | translate
+            }}</span>
+          </div>
+        </div>
       </div>
-      <div>
-        <div>{{ "profile.createLabel" | translate }}</div>
-        <div>{{ user["created"] | date }}</div>
+
+      <div id="bottom">
+        <h4 id="myCheatSheetsTxt">
+          {{ "profile.mySheets" | translate }}
+        </h4>
+
+        @if (isLoading) {
+          <div class="loading-message">
+            <h2>{{ "profile.loadingSheets" | translate }}</h2>
+          </div>
+        } @else if (userCheatsheets.length !== 0) {
+          <div id="allCards">
+            @for (sheet of userCheatsheets; track sheet.id) {
+              <div class="card" (click)="navigateToCheatsheet(sheet.id)">
+                @if (sheet["thumbnailUrl"] && showImages) {
+                  <img
+                    src="{{ sheet['thumbnailUrl'] }}"
+                    alt="{{ sheet['description'] }}"
+                    loading="lazy"
+                  />
+                }
+                <h2>{{ sheet["title"] }}</h2>
+                <p>{{ sheet["description"] }}</p>
+                <p>⭐ {{ sheet["stars"] || 0 }}</p>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="no-sheets-message">
+            <h2>{{ "profile.noSheets" | translate }}</h2>
+            <p>{{ "profile.createFirstSheet" | translate }}</p>
+          </div>
+        }
       </div>
     </div>
   </div>
