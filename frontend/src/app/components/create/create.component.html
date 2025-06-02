@@ -1,62 +1,66 @@
-<app-header></app-header>
-<div class="content-container">
-  <form>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "create.form.title" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.title" />
-        @if (form.controls.title.hasError("required") && this.touched()) {
-          <mat-error>{{ "create.form.titleRequired" | translate }}</mat-error>
-        }
-      </mat-form-field>
+<div id="wholePage">
+  <app-header></app-header>
+  <div class="restOfPage">
+    <div class="content-container">
+      <form>
+        <div>
+          <mat-form-field>
+            <mat-label>{{ "create.form.title" | translate }}</mat-label>
+            <input matInput [formControl]="form.controls.title"/>
+            @if (form.controls.title.hasError("required") && this.touched()) {
+              <mat-error>{{ "create.form.titleRequired" | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>{{ "create.form.description" | translate }}</mat-label>
+            <input matInput [formControl]="form.controls.description"/>
+            @if (form.controls.description.hasError("required") && this.touched()) {
+              <mat-error
+              >{{ "create.form.descriptionRequired" | translate }}
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>{{ "create.form.thumbnailUrl" | translate }}</mat-label>
+            <input matInput [formControl]="form.controls.thumbnailUrl"/>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>{{ "create.form.pdfUrl" | translate }}</mat-label>
+            <input matInput [formControl]="form.controls.pdfUrl"/>
+            @if (form.controls.pdfUrl.hasError("required") && this.touched()) {
+              <mat-error>{{ "create.form.pdfUrlRequired" | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>{{ "create.form.pdfUrl" | translate }}</mat-label>
+            <input matInput [formControl]="form.controls.pdfUrl"/>
+            @if (form.controls.pdfUrl.hasError("required") && this.touched()) {
+              <mat-error>{{ "create.form.pdfUrlRequired" | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-button (click)="redirect('home')">
+            {{ "create.back" | translate }}
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            (click)="submit()"
+          >
+            create
+          </button>
+        </div>
+      </form>
     </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "create.form.description" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.description" />
-        @if (form.controls.description.hasError("required") && this.touched()) {
-          <mat-error
-            >{{ "create.form.descriptionRequired" | translate }}
-          </mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "create.form.thumbnailUrl" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.thumbnailUrl" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "create.form.pdfUrl" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.pdfUrl" />
-        @if (form.controls.pdfUrl.hasError("required") && this.touched()) {
-          <mat-error>{{ "create.form.pdfUrlRequired" | translate }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <mat-label>{{ "create.form.pdfUrl" | translate }}</mat-label>
-        <input matInput [formControl]="form.controls.pdfUrl" />
-        @if (form.controls.pdfUrl.hasError("required") && this.touched()) {
-          <mat-error>{{ "create.form.pdfUrlRequired" | translate }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div>
-      <button mat-button (click)="redirect('home')">
-        {{ "create.back" | translate }}
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        (click)="submit()"
-      >
-        create
-      </button>
-    </div>
-  </form>
+  </div>
 </div>
