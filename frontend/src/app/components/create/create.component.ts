@@ -44,7 +44,7 @@ export class CreateComponent {
     title: new FormControl<string>('', [Validators.required]),
     description: new FormControl<string>('', [Validators.required]),
     pdfUrl: new FormControl<string>('', [Validators.required]),
-    thumbnailUrl: new FormControl<string>('', []),
+    thumbnailUrl: new FormControl<string>('', [Validators.required]),
   });
 
   constructor(

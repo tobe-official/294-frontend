@@ -2,7 +2,8 @@
   <div id="logoDiv">
     <h1 id="logo" (click)="redirect('home', false)">CheatSheetDB</h1>
   </div>
-  <div id="buttonRow">
+
+  <div id="buttonRow" class="desktop-nav">
     <button
       class="headerButton"
       mat-flat-button
@@ -25,12 +26,90 @@
       {{ "header.creditsButtonLabel" | translate }}
     </button>
     <button
+      class="headerButton"
+      mat-flat-button
+      (click)="redirect('profile', false)"
+    >
+      {{ "header.profileButtonLabel" | translate }}
+    </button>
+    <button
       id="loginButton"
       mat-stroked-button
-      color="#123456"
+      [class]="isLoggedIn ? 'logout-button' : 'login-button'"
       (click)="redirect('', isLoggedIn)"
     >
       {{ loginButtonLabel | translate }}
     </button>
   </div>
+
+  <!-- Mobile Hamburger Button -->
+  <div class="mobile-nav">
+    <button
+      mat-icon-button
+      id="hamburgerButton"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="isMobileMenuOpen"
+      aria-label="Toggle navigation menu"
+    >
+      <mat-icon>{{ isMobileMenuOpen ? "close" : "menu" }}</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
+
+<!-- Mobile Menu Overlay -->
+<div
+  class="mobile-menu-overlay"
+  [class.open]="isMobileMenuOpen"
+  (click)="closeMobileMenu()"
+></div>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" [class.open]="isMobileMenuOpen">
+  <div class="mobile-menu-content">
+    <div class="mobile-menu-items">
+      <button
+        class="mobile-menu-button"
+        mat-flat-button
+        (click)="redirect('home', false)"
+      >
+        {{ "header.homeButtonLabel" | translate }}
+      </button>
+      <button
+        class="mobile-menu-button"
+        mat-flat-button
+        (click)="redirect('browse', false)"
+      >
+        {{ "header.browseButtonLabel" | translate }}
+      </button>
+      <button
+        class="mobile-menu-button"
+        mat-flat-button
+        (click)="redirect('credits', false)"
+      >
+        {{ "header.creditsButtonLabel" | translate }}
+      </button>
+      <button
+        class="mobile-menu-button"
+        mat-flat-button
+        (click)="redirect('profile', false)"
+      >
+        {{ "header.profileButtonLabel" | translate }}
+      </button>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="danger-zone">
+      <div class="danger-zone-title">
+        <span>Account</span>
+      </div>
+      <button
+        class="danger-button"
+        [class]="isLoggedIn ? 'logout-button' : 'login-button'"
+        mat-flat-button
+        (click)="redirect('', isLoggedIn)"
+      >
+        {{ loginButtonLabel | translate }}
+      </button>
+    </div>
+  </div>
+</nav>

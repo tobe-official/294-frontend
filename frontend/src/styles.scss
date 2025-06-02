@@ -5,6 +5,10 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -19,6 +23,13 @@ h6 {
   padding: 0;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 //Variables:
 $primary_blue: #3078f2;
 $primary_white: #ffffff;
+$primary_red: #dc3545;

@@ -36,6 +36,7 @@
                 <img
                   src="{{ sheet['thumbnailUrl'] }}"
                   alt="{{ sheet['description'] }}"
+                  [class.blurred]="!isLoggedIn"
                   loading="lazy"
                 />
               }
