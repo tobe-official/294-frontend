@@ -1,5 +1,11 @@
-import {Component, OnInit, OnDestroy, Inject, PLATFORM_ID} from '@angular/core';
-import {isPlatformBrowser} from '@angular/common';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import {isPlatformBrowser, NgOptimizedImage} from '@angular/common';
 import {MatButton} from '@angular/material/button';
 import {Router} from '@angular/router';
 import {redirectTo} from '../../utils/router-functions';
@@ -9,23 +15,18 @@ import {HeaderComponent} from '../header/header.component';
 import {TranslatePipe} from '@ngx-translate/core';
 import {RecordModel} from 'pocketbase';
 import {CheatsheetService} from '../../services/cheatsheet/cheatsheet.service';
-import {NgOptimizedImage} from '@angular/common';
-import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
-import { redirectTo } from '../../utils/router-functions';
-import { RouteLocations } from '../../models/route-locations';
-import { AuthService } from '../../services/auth/auth.service';
-import { HeaderComponent } from '../header/header.component';
-import { TranslatePipe } from '@ngx-translate/core';
-import { RecordModel } from 'pocketbase';
-import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-base-site',
   standalone: true,
-  imports: [MatButton, HeaderComponent, TranslatePipe, ReactiveFormsModule],
+  imports: [
+    MatButton,
+    HeaderComponent,
+    TranslatePipe,
+    ReactiveFormsModule,
+    NgOptimizedImage,
+  ],
   templateUrl: './base-site.component.html',
   styleUrl: './base-site.component.scss',
 })
@@ -52,17 +53,8 @@ export class BaseSiteComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) platformId: object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
-
     const loggedInUser: RecordModel | null = this.authService.getLoggedInUser();
     this.user = loggedInUser ?? this.emptyUser;
-
-    window.addEventListener('resize', () => {
-      this.showImages = window.innerWidth > this.maxWidth;
-    });
-
-    this.cheatSheetService.getTopFourCheatSheets().then((cheatsheets) => {
-      this.topCheatSheets = cheatsheets.items;
-    });
   }
 
   public ngOnInit(): void {
@@ -71,6 +63,10 @@ export class BaseSiteComponent implements OnInit, OnDestroy {
       this.resizeListener = () => this.updateShowImages();
       window.addEventListener('resize', this.resizeListener);
     }
+
+    this.cheatSheetService.getTopFourCheatSheets().then((cheatsheets) => {
+      this.topCheatSheets = cheatsheets.items;
+    });
   }
 
   public ngOnDestroy(): void {
@@ -80,9 +76,7 @@ export class BaseSiteComponent implements OnInit, OnDestroy {
   }
 
   private updateShowImages(): void {
-    if (this.isBrowser) {
-      this.showImages = window.innerWidth > this.maxWidth;
-    }
+    this.showImages = this.isBrowser && window.innerWidth > this.maxWidth;
   }
 
   public get isLoggedIn(): boolean {
