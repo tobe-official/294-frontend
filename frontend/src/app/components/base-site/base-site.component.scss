@@ -107,6 +107,12 @@
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 1rem;
+
+            &.blurred {
+              filter: blur(8px);
+              pointer-events: none;
+              user-select: none;
+            }
           }
 
           h2 {
