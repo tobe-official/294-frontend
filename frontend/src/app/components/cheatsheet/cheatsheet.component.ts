@@ -1,18 +1,21 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
-import { RecordModel } from 'pocketbase';
-import { DatePipe } from '@angular/common';
-import { AuthService } from '../../services/auth/auth.service';
-import { ReviewService } from '../../services/review/review.service';
+import {Component, inject, signal, Signal} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CheatsheetService} from '../../services/cheatsheet/cheatsheet.service';
+import {RecordModel} from 'pocketbase';
+import {DatePipe} from '@angular/common';
+import {AuthService} from '../../services/auth/auth.service';
+import {ReviewService} from '../../services/review/review.service';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cheatsheet',
-  imports: [DatePipe],
+  imports: [DatePipe, ReactiveFormsModule, TranslatePipe],
   templateUrl: './cheatsheet.component.html',
   styleUrl: './cheatsheet.component.scss',
 })
 export class CheatsheetComponent {
+  public touched: Signal<boolean> = signal(false);
   public cheatsheetAcquired = false;
   public cheatsheet: RecordModel = {
     id: '',
@@ -23,6 +26,11 @@ export class CheatsheetComponent {
   private cheatsheetId: string = '';
   private activatedRoute = inject(ActivatedRoute);
   public reviews: RecordModel[] = [];
+  public userRating: number = 0
+
+  public form = new FormGroup({
+    search: new FormControl<string>('', [Validators.required]),
+  });
 
   constructor(
     private authService: AuthService,
@@ -52,9 +60,17 @@ export class CheatsheetComponent {
     );
   }
 
-  public submit() {
+  public buyCheatsheet() {
     this.authService.buyCheatsheet(this.cheatsheetId).then(() => {
       this.cheatsheetAcquired = true;
     });
+  }
+
+  public setRating(rating: number) {
+    this.userRating = rating;
+  }
+
+  public submit() {
+    this.touched = signal(true);
   }
 }

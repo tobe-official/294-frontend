@@ -2,23 +2,24 @@
   <div class="cheatsheet-header">
     <h2>{{ cheatsheet["title"] }}</h2>
   </div>
-
   <div class="cheatsheet-body">
     <p class="description">{{ cheatsheet["description"] }}</p>
-    <p>⭐ {{ cheatsheet["stars"] }}</p>
-
+    <div class="overall-rating">
+      <div class="star-display">
+        <span class="stars" [attr.data-rating]="cheatsheet['stars']"></span>
+      </div>
+    </div>
     <div class="price-section">
       <div class="price-info">
         <span class="price">Price: {{ cheatsheet["price"] }}</span>
         <span class="credits">Your credits: {{ loggedInUserCredits }}</span>
       </div>
-
       <button
-        class="download-btn"
+        class="btn"
         [disabled]="
           cheatsheetAcquired || cheatsheet['price'] > loggedInUserCredits
         "
-        (click)="submit()"
+        (click)="buyCheatsheet()"
       >
         <i class="fa fa-download"></i>
         {{ "Download" }}
@@ -29,6 +30,38 @@
     }
   </div>
 
+  <div class="rate-section">
+    <h3>Rate this cheatsheet:</h3>
+    <div class="text">
+      <input
+        [formControl]="form.controls.search"
+        type="text"
+        class="field-input"
+      />
+      @if (form.controls.search.hasError("required") && touched()) {
+        <div class="field-error">
+          <span>⚠
+            {{ 'error' | translate }}
+            </span>
+        </div>
+      }
+    </div>
+    <div class="action-cluster">
+      <div class="rating-input">
+        @for (star of [1, 2, 3, 4, 5]; track star) {
+          <button
+            class="star-btn"
+            [class.active]="star <= userRating"
+            (click)="setRating(star)"
+          >
+            ⭐
+          </button>
+        }
+      </div>
+      <button (click)="submit()" type="submit" class='btn'>Submit</button>
+    </div>
+  </div>
+
   <div class="reviews-section">
     <h3>Reviews</h3>
     @if (reviews && reviews.length > 0) {
@@ -36,12 +69,17 @@
         @for (review of reviews; track review) {
           <div class="review-item">
             <div class="review-header">
-              <span class="reviewer">{{ review["user"] }}</span>
-              <span class="review-date">{{
-                review["created"] | date: "dd.MM.yyyy"
-              }}</span>
+              <div class="review-stars">
+                <span class="stars" [attr.data-rating]="review['stars']"></span>
+              </div>
+              <span class="review-text">{{ review["text"] }}</span>
+              <div class="review-meta">
+                <span class="reviewer">{{ review["user"] }}</span>
+                <span class="review-date">{{
+                    review["created"] | date: "MMM d, yyyy"
+                  }}</span>
+              </div>
             </div>
-            <p class="review-content">{{ review["text"] }}</p>
           </div>
         }
       </div>

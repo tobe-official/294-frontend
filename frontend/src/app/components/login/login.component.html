@@ -17,8 +17,8 @@
 
     @if (errorMessage()) {
       <div class="error-banner">
-        <div class="error-icon">⚠</div>
-        <span class="error-text">{{ errorMessage() | translate }}</span>
+        <div>⚠</div>
+        <span>{{ errorMessage() | translate }}</span>
       </div>
     }
 
@@ -38,7 +38,7 @@
           />
           @if (hasFieldError("name")) {
             <div class="field-error">
-              <span class="error-icon">⚠</span>
+              <span>⚠</span>
               {{ getFieldError("name") | translate }}
             </div>
           }
@@ -59,7 +59,7 @@
         />
         @if (hasFieldError("email")) {
           <div class="field-error">
-            <span class="error-icon">⚠</span>
+            <span>⚠</span>
             {{ getFieldError("email") | translate }}
           </div>
         }
@@ -79,7 +79,7 @@
         />
         @if (hasFieldError("password")) {
           <div class="field-error">
-            <span class="error-icon">⚠</span>
+            <span>⚠</span>
             {{ getFieldError("password") | translate }}
           </div>
         }
@@ -100,7 +100,7 @@
           />
           @if (hasFieldError("confirmPassword")) {
             <div class="field-error">
-              <span class="error-icon">⚠</span>
+              <span>⚠</span>
               {{ getFieldError("confirmPassword") | translate }}
             </div>
           }
