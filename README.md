@@ -6,7 +6,21 @@ This project includes:
 	•	🐳 Docker-based development workflow
 
 ⸻
+To run this project completely it is required to follow these Steps:
+- Clone the project
+```bash
+git clone git@github.com:tobe-official/294-frontend.git
+```
+- Go into the project and into the frontent directory:
+```bash
+cd 294-frontend/frontend
+```
+- Run Docker Compose
+```bash
+docker compose up
+```
 
+⸻
 🗄️ Start Backend Only (PocketBase)
 
 To run only the PocketBase backend in detached mode:
