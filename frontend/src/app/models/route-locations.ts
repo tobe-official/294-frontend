@@ -5,4 +5,5 @@ export type RouteLocations =
   | 'browse'
   | 'profile'
   | 'login'
+  | `cheatsheet/${string}`
   | 'credits';

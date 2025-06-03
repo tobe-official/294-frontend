@@ -31,7 +31,7 @@
       @if (topCheatSheets.length !== 0) {
         <div id="allCards">
           @for (sheet of topCheatSheets; track $index) {
-            <div class="card" (click)="redirect('browse')">
+            <div class="card" (click)="redirectToCheatsheet(sheet['id'])">
               @if (showImages) {
                 <img
                   src="{{ sheet['thumbnailUrl'] }}"

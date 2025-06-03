@@ -43,6 +43,7 @@ export class CreateComponent {
   public readonly form = new FormGroup({
     title: new FormControl<string>('', [Validators.required]),
     description: new FormControl<string>('', [Validators.required]),
+    price: new FormControl<number>(0, [Validators.required]),
     pdfUrl: new FormControl<string>('', [Validators.required]),
     thumbnailUrl: new FormControl<string>('', [Validators.required]),
   });
@@ -64,10 +65,11 @@ export class CreateComponent {
       const cheatSheet: Cheatsheet = {
         title: rawValue.title || '',
         description: rawValue.description || '',
+        price: rawValue.price || 0,
         pdfUrl: rawValue.pdfUrl || '',
         thumbnailUrl: rawValue.thumbnailUrl || '',
         uploader: this.authService.getLoggedInUser()?.id,
-        stars: 0,
+        stars: 1,
       };
       this.cheatsheetService.create(cheatSheet).then((record) => {
         if (record) {
