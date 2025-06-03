@@ -45,16 +45,42 @@
     "loginButtonLabel": "Login"
   },
   "create": {
+    "title": "Create",
+    "subtitle": "Upload your sheet for others to buy",
     "form": {
-      "title": "title",
-      "titleRequired": "title is required",
-      "description": "description",
-      "descriptionRequired": "description is required",
-      "thumbnailUrl": "url for thumbnail image",
-      "pdfUrl": "url to the cheatsheet",
-      "pdfUrlRequired": "pdf url is required"
+      "title": "Title",
+      "titlePlaceholder": "Your sheet title",
+      "titleHint": "Between 3 and 100 characters",
+      "titleRequired": "Title is required",
+      "titleMinlength": "Title must be at least 3 characters",
+      "titleMaxlength": "Title cannot exceed 75 characters",
+      "titleInvalid": "Invalid title format",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe what is in your sheet",
+      "descriptionHint": "Max 300 characters",
+      "descriptionRequired": "Description is required",
+      "descriptionMinlength": "Description must be at least 10 characters",
+      "descriptionMaxlength": "Description cannot exceed 300 characters",
+      "descriptionInvalid": "Invalid description format",
+      "thumbnailUrl": "Url for thumbnail image",
+      "thumbnailUrlPlaceholder": "https://link-to-your-thumbnail.png",
+      "thumbnailUrlHint": "URL to an image file (jpg, png, gif, etc.)",
+      "thumbnailUrlRequired": "Thumbnail URL is required",
+      "thumbnailUrlInvalid": "Invalid thumbnail URL format",
+      "notImageUrl": "Please provide a valid image URL ending in .jpg, .png, etc.",
+      "thumbnailUrlInvalidFormat": "Invalid image URL",
+      "pdfUrl": "Url to the cheatsheet",
+      "pdfUrlPlaceholder": "https://link-to-your-complete-sheet.com",
+      "pdfUrlHint": "Direct link to your PDF file",
+      "pdfUrlRequired": "PDF URL is required",
+      "notPdfUrl": "Please provide a valid PDF URL ending with .pdf",
+      "pdfUrlInvalid": "Invalid PDF URL format",
+      "invalidUrl": "Please enter a valid URL starting with https://",
+      "hasSpecialChars": "Title cannot contain special characters like < > { } [ ] \\ /",
+      "uploadHint": "Uploading more sheets helps you gain credits!"
     },
-    "back": "back"
+    "submit": "Submit",
+    "back": "Back"
   },
   "browse": {
     "noCheatsheets": "No cheatsheets found"

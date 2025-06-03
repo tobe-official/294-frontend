@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
       .then((cheatsheets) => {
         this.allCheatsheets = cheatsheets;
         this.userCheatsheets = cheatsheets.filter(
-          (sheet) => sheet['author'] === this.user.id,
+          (sheet) => sheet['uploader'] === this.user.id,
         );
         this.sortByStars();
         this.isLoading = false;
