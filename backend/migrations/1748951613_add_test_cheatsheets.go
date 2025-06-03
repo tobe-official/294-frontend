@@ -22,12 +22,14 @@ func init() {
 			pdf := fmt.Sprintf("https://example.com/cheatsheet%d.pdf", i)
 			thumb := "https://picsum.photos/400/300"
 			stars := (i%5 + 1)
+			price := (i%15 + 1)
 
 			rec.Set("title", title)
 			rec.Set("description", desc)
 			rec.Set("pdfUrl", pdf)
 			rec.Set("thumbnailUrl", thumb)
 			rec.Set("stars", stars)
+			rec.Set("price", price)
 
 			if err := app.Save(rec); err != nil {
 				return fmt.Errorf("failed to insert %q: %w", title, err)
