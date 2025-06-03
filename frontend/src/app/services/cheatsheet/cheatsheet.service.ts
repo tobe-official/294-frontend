@@ -26,4 +26,17 @@ export class CheatsheetService {
       sort: '-stars',
     });
   }
+
+  public async getCheatsheetById(id: string) {
+    return this.pb.collection('cheatsheets').getOne(id);
+  }
+
+  public async updateCheatsheetStars(stars: number, id: string) {
+    if (stars && id) {
+      return this.pb.collection('cheatsheets').update(id, {
+        stars,
+      });
+    }
+    throw new Error('stars or id are invalid');
+  }
 }

@@ -6,6 +6,7 @@ import { CreateComponent } from './components/create/create.component';
 import { BaseSiteComponent } from './components/base-site/base-site.component';
 import { CreditsComponent } from './components/credits/credits.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CheatsheetComponent } from './components/cheatsheet/cheatsheet.component';
 
 export const routes: Routes = [
   {
@@ -40,5 +41,10 @@ export const routes: Routes = [
     path: 'credits',
     canActivate: [loginGuard],
     component: CreditsComponent,
+  },
+  {
+    path: 'cheatsheet/:id',
+    canActivate: [loginGuard],
+    component: CheatsheetComponent,
   },
 ];

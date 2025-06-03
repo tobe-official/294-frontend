@@ -65,6 +65,11 @@ export class CreateComponent {
       Validators.required,
       this.urlValidator,
     ]),
+    title: new FormControl<string>('', [Validators.required]),
+    description: new FormControl<string>('', [Validators.required]),
+    price: new FormControl<number>(0, [Validators.required]),
+    pdfUrl: new FormControl<string>('', [Validators.required]),
+    thumbnailUrl: new FormControl<string>('', [Validators.required]),
   });
 
   private readonly loggedInUser: RecordModel | null;

@@ -124,4 +124,8 @@ export class BrowseComponent implements OnInit {
   public redirect(location: RouteLocations): void {
     redirectTo(location, this.router);
   }
+
+  public redirectToCheatsheet(id: string) {
+    redirectTo(`cheatsheet/${id}`, this.router);
+  }
 }

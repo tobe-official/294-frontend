@@ -113,5 +113,18 @@
     "viewAllButtonLabel": "View all",
     "noSheetsFound": "No sheets found",
     "searchPlaceholder": "Search a cheat sheet"
+  },
+  "cheatsheet": {
+    "info": {
+      "price": "Price: ",
+      "yourCredits": "Your credits: ",
+      "download": "Download",
+      "rateThisCheatsheet": "Rate this Cheatsheet"
+    },
+    "reviews": {
+      "title": "Reviews",
+      "noReviews": "No reviews found",
+      "submit": "Submit"
+    }
   }
 }
