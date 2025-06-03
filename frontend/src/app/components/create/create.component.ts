@@ -69,7 +69,7 @@ export class CreateComponent {
     ]),
     price: new FormControl<number | null>(null, [
       Validators.required,
-      Validators.min(0),
+      Validators.min(1),
     ]),
   });
 

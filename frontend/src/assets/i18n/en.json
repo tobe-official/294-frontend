@@ -79,7 +79,7 @@
       "priceHint": "The price is being charged from credits of other users (10 is fair for 3 pages)",
       "pricePlaceholder": "Enter your price in credits",
       "priceRequired": "Price is required",
-      "priceMin": "Price must be at least 0 credits",
+      "priceMin": "Price must be at least 1 credits",
       "invalidUrl": "Please enter a valid URL starting with https://",
       "hasSpecialChars": "Title cannot contain special characters like < > { } [ ] \\ /",
       "uploadHint": "Uploading more sheets helps you gain credits!"
