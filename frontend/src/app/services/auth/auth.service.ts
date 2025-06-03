@@ -11,7 +11,9 @@ import { redirectTo } from '../../utils/router-functions';
 export class AuthService {
   private pb = new PocketBase('http://localhost:8090');
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.pb.autoCancellation(false);
+  }
 
   public async register(user: User) {
     if (user) {
@@ -85,12 +87,12 @@ export class AuthService {
   }
 
   public async addCreditsToUser(amount: number, id: string) {
-    let user: RecordModel | null = null;
-    user = await this.getUserById(id);
-    if (!user) return;
-    const currentCredits = user['credits'] || 0;
-    await this.pb.collection('users').update(user.id, {
-      credits: currentCredits + amount,
+    this.getUserById(id).then((user) => {
+      if (!user) return;
+      const currentCredits = user['credits'] || 0;
+      this.pb.collection('users').update(user.id, {
+        credits: currentCredits + amount,
+      });
     });
   }
 }

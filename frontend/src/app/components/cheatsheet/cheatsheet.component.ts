@@ -68,7 +68,7 @@ export class CheatsheetComponent {
         cheatsheet: this.cheatsheetId,
         user: this.loggedInUserId,
       };
-      this.reviewService.createReview(review).then((record) => {
+      await this.reviewService.createReview(review).then((record) => {
         if (record) {
           this.ratingSubmitted = signal(true);
           this.fetchData();
@@ -76,13 +76,16 @@ export class CheatsheetComponent {
           console.error('Creation failed');
         }
       });
-      let number = 0;
+      let number = 1;
       await this.reviewService
         .calculateCheatsheetsStars(this.cheatsheetId)
         .then((value) => {
           number = value;
         });
-      this.cheatsheetService.updateCheatsheetStars(number, this.cheatsheetId);
+      await this.cheatsheetService.updateCheatsheetStars(
+        number,
+        this.cheatsheetId,
+      );
     }
   }
 
