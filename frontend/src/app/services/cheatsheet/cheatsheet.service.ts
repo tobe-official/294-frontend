@@ -9,7 +9,9 @@ import { AuthService } from '../auth/auth.service';
 export class CheatsheetService {
   private pb = new PocketBase('http://localhost:8090');
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.pb.autoCancellation(false);
+  }
 
   public async create(cheatsheet: Cheatsheet): Promise<RecordModel | null> {
     const loggedInUser = this.authService.getLoggedInUser();

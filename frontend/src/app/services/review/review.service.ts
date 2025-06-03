@@ -8,7 +8,9 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ReviewService {
   private pb = new PocketBase('http://localhost:8090');
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.pb.autoCancellation(false);
+  }
 
   public async getReviewsByCheatsheetId(id: string): Promise<RecordModel[]> {
     return await this.pb.collection('reviews').getFullList({
@@ -17,40 +19,36 @@ export class ReviewService {
   }
 
   public async createReview(review: Review): Promise<RecordModel | null> {
-    const reviewRecordModelPromise = this.pb
+    const reviewRecordModel = await this.pb
       .collection('reviews')
       .create(review);
-    const cheatsheetRecordModelPromise = this.pb
+    const cheatsheet = await this.pb
       .collection('cheatsheets')
       .getOne(review['cheatsheet']);
-    if (reviewRecordModelPromise) {
-      // 1 credit for the user that reviewed it
-      await this.authService.addCreditsToUser(1, review['user']);
-      // star amount of credits for the uploader
-      await cheatsheetRecordModelPromise.then((cheatsheet) => {
-        this.authService.addCreditsToUser(
-          review['stars'],
-          cheatsheet['uploader'],
-        );
-      });
-      return reviewRecordModelPromise;
-    }
-    throw new Error('invalid review');
+
+    // 1 credit for the user that reviewed it
+    await this.authService.addCreditsToUser(1, review['user']);
+    // Add credits to uploader after both are ready
+    await this.authService.addCreditsToUser(
+      review['stars'],
+      cheatsheet['uploader'],
+    );
+
+    return reviewRecordModel;
   }
 
   public async calculateCheatsheetsStars(
     cheatsheetId: string,
   ): Promise<number> {
-    let averageStars: number = 0;
-    await this.getReviewsByCheatsheetId(cheatsheetId).then((reviews) => {
-      if (reviews.length > 0) {
-        const totalStars = reviews.reduce(
-          (sum, review) => sum + (review['stars'] || 0),
-          0,
-        );
-        averageStars = totalStars / reviews.length;
-      }
-    });
+    const reviews = await this.getReviewsByCheatsheetId(cheatsheetId);
+    if (!reviews || reviews.length === 0) {
+      return 1;
+    }
+    const totalStars = reviews.reduce(
+      (sum, review) => sum + (review['stars'] || 1),
+      0,
+    );
+    const averageStars = totalStars / reviews.length;
     return Math.round(averageStars);
   }
 }
