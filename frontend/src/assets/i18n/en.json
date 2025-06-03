@@ -92,11 +92,13 @@
     "info": {
       "price": "Price: ",
       "yourCredits": "Your credits: ",
-      "download": "Download"
+      "download": "Download",
+      "rateThisCheatsheet": "Rate this Cheatsheet"
     },
     "reviews": {
       "title": "Reviews",
-      "noReviews": "No reviews found"
+      "noReviews": "No reviews found",
+      "submit": "Submit"
     }
   }
 }
