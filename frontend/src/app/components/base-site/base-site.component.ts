@@ -80,4 +80,8 @@ export class BaseSiteComponent implements OnInit, OnDestroy {
   public redirect(location: RouteLocations): void {
     redirectTo(this.isLoggedIn ? location : 'login', this.router);
   }
+
+  public redirectToCheatsheet(id: string) {
+    redirectTo(this.isLoggedIn ? `cheatsheet/${id}` : 'login', this.router);
+  }
 }

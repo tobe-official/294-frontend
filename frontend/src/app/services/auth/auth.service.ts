@@ -58,14 +58,23 @@ export class AuthService {
 
   public async buyCheatsheet(id: string) {
     const user = this.getLoggedInUser();
+    let cheatsheetPrice: number = 0
+    await this.pb.collection('cheatsheets').getOne(id, {
+      fields: 'price'
+    }).then((price) => {
+      cheatsheetPrice = price['price']
+    })
     if (!user) return;
 
     const currentCheatsheets = user['acquired_cheatsheets'] || [];
+    const currentCredits = user['credits'] || 0
     const updatedCheatsheets = [...currentCheatsheets, id];
-
-    await this.pb.collection('users').update(user.id, {
-      acquired_cheatsheets: updatedCheatsheets,
-    });
+    if (updatedCheatsheets && cheatsheetPrice<currentCredits){
+      await this.pb.collection('users').update(user.id, {
+        acquired_cheatsheets: updatedCheatsheets,
+        credits: currentCredits-cheatsheetPrice
+      });
+    }
   }
 
   public hasLoggedInUserAcquiredCheatsheet(cheatsheetId: string) {

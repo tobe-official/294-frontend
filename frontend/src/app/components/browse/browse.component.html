@@ -14,7 +14,7 @@
       @if (cheatsheets.length) {
         <div id="allCards">
           @for (sheet of cheatsheets; track $index) {
-            <div class="card" (click)="redirect('home')">
+            <div class="card" (click)="redirectToCheatsheet(sheet['id'])">
               @if (showImages) {
                 <img
                   [src]="sheet['thumbnailUrl']"

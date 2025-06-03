@@ -7,6 +7,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {ReviewService} from '../../services/review/review.service';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TranslatePipe} from '@ngx-translate/core';
+import {Review} from '../../models/review';
 
 @Component({
   selector: 'app-cheatsheet',
@@ -16,6 +17,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 })
 export class CheatsheetComponent {
   public touched: Signal<boolean> = signal(false);
+  public ratingSubmitted: Signal<boolean> = signal(false);
   public cheatsheetAcquired = false;
   public cheatsheet: RecordModel = {
     id: '',
@@ -23,10 +25,11 @@ export class CheatsheetComponent {
     collectionName: '',
   };
   public loggedInUserCredits: number;
+  public loggedInUserId: string;
   private cheatsheetId: string = '';
   private activatedRoute = inject(ActivatedRoute);
   public reviews: RecordModel[] = [];
-  public userRating: number = 0
+  public userRating: number = 1
 
   public form = new FormGroup({
     search: new FormControl<string>('', [Validators.required]),
@@ -39,6 +42,7 @@ export class CheatsheetComponent {
   ) {
     const loggedInUser = this.authService.getLoggedInUser();
     this.loggedInUserCredits = loggedInUser ? loggedInUser['credits'] : -1;
+    this.loggedInUserId = loggedInUser ? loggedInUser['id'] : '';
     this.activatedRoute.params.subscribe((params) => {
       this.cheatsheetId = params['id'];
     });
@@ -49,15 +53,17 @@ export class CheatsheetComponent {
           this.cheatsheet = cheatsheet;
         });
     }
-    this.reviewService
-      .getReviewsByCheatsheetId(this.cheatsheetId)
+    this.reviewService.getReviewsByCheatsheetId(this.cheatsheetId)
       .then((reviews) => {
         this.reviews = reviews;
+        const hasReviewed = reviews.some((review) => review['user'] === this.loggedInUserId);
+        this.ratingSubmitted = signal(hasReviewed);
       });
 
     this.cheatsheetAcquired = authService.hasLoggedInUserAcquiredCheatsheet(
       this.cheatsheetId,
     );
+
   }
 
   public buyCheatsheet() {
@@ -70,7 +76,29 @@ export class CheatsheetComponent {
     this.userRating = rating;
   }
 
-  public submit() {
+  public async submit() {
     this.touched = signal(true);
+    if (this.form.valid) {
+      const review: Review = {
+        text: this.form.getRawValue().search || '',
+        stars: this.userRating,
+        cheatsheet: this.cheatsheetId,
+        user: this.loggedInUserId
+      }
+      this.reviewService.createReview(review).then((record) => {
+        if (record) {
+          this.ratingSubmitted = signal(true)
+        } else {
+          console.error('Creation failed');
+        }
+      });
+      let number = 0;
+      await this.reviewService.calculateCheatsheetsStars(this.cheatsheetId).then((value) => {
+        number = value
+      });
+      this.cheatsheetService.updateCheatsheetStars(
+        number, this.cheatsheetId
+      )
+    }
   }
 }

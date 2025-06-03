@@ -30,38 +30,40 @@
     }
   </div>
 
-  <div class="rate-section">
-    <h3>Rate this cheatsheet:</h3>
-    <div class="text">
-      <input
-        [formControl]="form.controls.search"
-        type="text"
-        class="field-input"
-      />
-      @if (form.controls.search.hasError("required") && touched()) {
-        <div class="field-error">
+  @if (!ratingSubmitted()) {
+    <div class="rate-section">
+      <h3>Rate this cheatsheet:</h3>
+      <div class="text">
+        <input
+          [formControl]="form.controls.search"
+          type="text"
+          class="field-input"
+        />
+        @if (form.controls.search.hasError("required") && touched()) {
+          <div class="field-error">
           <span>⚠
             {{ 'error' | translate }}
             </span>
-        </div>
-      }
-    </div>
-    <div class="action-cluster">
-      <div class="rating-input">
-        @for (star of [1, 2, 3, 4, 5]; track star) {
-          <button
-            class="star-btn"
-            [class.active]="star <= userRating"
-            (click)="setRating(star)"
-          >
-            ⭐
-          </button>
+          </div>
         }
       </div>
-      <button (click)="submit()" type="submit" class='btn'>Submit</button>
+      <div class="action-cluster">
+        <div class="rating-input">
+          @for (star of [1, 2, 3, 4, 5]; track star) {
+            <button
+              class="star-btn"
+              [class.active]="star <= userRating"
+              (click)="setRating(star)"
+            >
+              ⭐
+            </button>
+          }
+        </div>
+        <button (click)="submit()" type="submit" class='btn'>Submit</button>
+      </div>
     </div>
-  </div>
 
+  }
   <div class="reviews-section">
     <h3>Reviews</h3>
     @if (reviews && reviews.length > 0) {
