@@ -1,17 +1,23 @@
-import {Component, inject, signal, Signal} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {CheatsheetService} from '../../services/cheatsheet/cheatsheet.service';
-import {RecordModel} from 'pocketbase';
-import {DatePipe} from '@angular/common';
-import {AuthService} from '../../services/auth/auth.service';
-import {ReviewService} from '../../services/review/review.service';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TranslatePipe} from '@ngx-translate/core';
-import {Review} from '../../models/review';
+import { Component, inject, signal, Signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service';
+import { RecordModel } from 'pocketbase';
+import { DatePipe } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
+import { ReviewService } from '../../services/review/review.service';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Review } from '../../models/review';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-cheatsheet',
-  imports: [DatePipe, ReactiveFormsModule, TranslatePipe],
+  imports: [DatePipe, ReactiveFormsModule, TranslatePipe, HeaderComponent],
   templateUrl: './cheatsheet.component.html',
   styleUrl: './cheatsheet.component.scss',
 })
@@ -29,7 +35,7 @@ export class CheatsheetComponent {
   private cheatsheetId: string = '';
   private activatedRoute = inject(ActivatedRoute);
   public reviews: RecordModel[] = [];
-  public userRating: number = 1
+  public userRating: number = 1;
 
   public form = new FormGroup({
     search: new FormControl<string>('', [Validators.required]),
@@ -53,17 +59,19 @@ export class CheatsheetComponent {
           this.cheatsheet = cheatsheet;
         });
     }
-    this.reviewService.getReviewsByCheatsheetId(this.cheatsheetId)
+    this.reviewService
+      .getReviewsByCheatsheetId(this.cheatsheetId)
       .then((reviews) => {
         this.reviews = reviews;
-        const hasReviewed = reviews.some((review) => review['user'] === this.loggedInUserId);
+        const hasReviewed = reviews.some(
+          (review) => review['user'] === this.loggedInUserId,
+        );
         this.ratingSubmitted = signal(hasReviewed);
       });
 
     this.cheatsheetAcquired = authService.hasLoggedInUserAcquiredCheatsheet(
       this.cheatsheetId,
     );
-
   }
 
   public buyCheatsheet() {
@@ -83,22 +91,22 @@ export class CheatsheetComponent {
         text: this.form.getRawValue().search || '',
         stars: this.userRating,
         cheatsheet: this.cheatsheetId,
-        user: this.loggedInUserId
-      }
+        user: this.loggedInUserId,
+      };
       this.reviewService.createReview(review).then((record) => {
         if (record) {
-          this.ratingSubmitted = signal(true)
+          this.ratingSubmitted = signal(true);
         } else {
           console.error('Creation failed');
         }
       });
       let number = 0;
-      await this.reviewService.calculateCheatsheetsStars(this.cheatsheetId).then((value) => {
-        number = value
-      });
-      this.cheatsheetService.updateCheatsheetStars(
-        number, this.cheatsheetId
-      )
+      await this.reviewService
+        .calculateCheatsheetsStars(this.cheatsheetId)
+        .then((value) => {
+          number = value;
+        });
+      this.cheatsheetService.updateCheatsheetStars(number, this.cheatsheetId);
     }
   }
 }

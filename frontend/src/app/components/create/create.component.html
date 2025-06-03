@@ -31,12 +31,8 @@
           <mat-form-field>
             <mat-label>{{ "create.form.price" | translate }}</mat-label>
             <input matInput [formControl]="form.controls.price" />
-            @if (
-              form.controls.price.hasError("required") && this.touched()
-              ) {
-              <mat-error
-              >{{ "create.form.price" | translate }}
-              </mat-error>
+            @if (form.controls.price.hasError("required") && this.touched()) {
+              <mat-error>{{ "create.form.price" | translate }} </mat-error>
             }
           </mat-form-field>
         </div>

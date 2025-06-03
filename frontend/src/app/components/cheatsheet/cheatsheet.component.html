@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="cheatsheet-container">
   <div class="cheatsheet-header">
     <h2>{{ cheatsheet["title"] }}</h2>
@@ -11,8 +12,14 @@
     </div>
     <div class="price-section">
       <div class="price-info">
-        <span class="price">Price: {{ cheatsheet["price"] }}</span>
-        <span class="credits">Your credits: {{ loggedInUserCredits }}</span>
+        <span class="price"
+          >{{ "cheatsheet.info.price" | translate }}
+          {{ cheatsheet["price"] }}</span
+        >
+        <span class="credits"
+          >{{ "cheatsheet.info.yourCredits" | translate }}
+          {{ loggedInUserCredits }}</span
+        >
       </div>
       <button
         class="btn"
@@ -22,7 +29,7 @@
         (click)="buyCheatsheet()"
       >
         <i class="fa fa-download"></i>
-        {{ "Download" }}
+        {{ "cheatsheet.info.download" | translate }}
       </button>
     </div>
     @if (cheatsheetAcquired) {
@@ -32,7 +39,7 @@
 
   @if (!ratingSubmitted()) {
     <div class="rate-section">
-      <h3>Rate this cheatsheet:</h3>
+      <h3>{{ "cheatsheet.info.rateThisCheatsheet" | translate }}:</h3>
       <div class="text">
         <input
           [formControl]="form.controls.search"
@@ -41,8 +48,9 @@
         />
         @if (form.controls.search.hasError("required") && touched()) {
           <div class="field-error">
-          <span>⚠
-            {{ 'error' | translate }}
+            <span
+              >⚠
+              {{ "error" | translate }}
             </span>
           </div>
         }
@@ -59,13 +67,14 @@
             </button>
           }
         </div>
-        <button (click)="submit()" type="submit" class='btn'>Submit</button>
+        <button (click)="submit()" type="submit" class="btn">
+          {{ "cheatsheet.createReview.submit" | translate }}
+        </button>
       </div>
     </div>
-
   }
   <div class="reviews-section">
-    <h3>Reviews</h3>
+    <h3>{{ "cheatsheet.reviews.title" | translate }}</h3>
     @if (reviews && reviews.length > 0) {
       <div>
         @for (review of reviews; track review) {
@@ -78,8 +87,8 @@
               <div class="review-meta">
                 <span class="reviewer">{{ review["user"] }}</span>
                 <span class="review-date">{{
-                    review["created"] | date: "MMM d, yyyy"
-                  }}</span>
+                  review["created"] | date: "MMM d, yyyy"
+                }}</span>
               </div>
             </div>
           </div>
@@ -87,7 +96,7 @@
       </div>
     } @else {
       <div>
-        <p>No reviews yet.</p>
+        <p>{{ "cheatsheet.reviews.noReviews" | translate }}</p>
       </div>
     }
   </div>

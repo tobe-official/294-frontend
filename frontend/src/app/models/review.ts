@@ -1,7 +1,7 @@
 export interface Review {
-  text: string,
-  stars: number
+  text: string;
+  stars: number;
   // RELATION_RECORD_ID
-  cheatsheet: string
-  user: string
+  cheatsheet: string;
+  user: string;
 }

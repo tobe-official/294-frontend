@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import PocketBase, {ListResult, RecordModel} from 'pocketbase';
-import {Router} from '@angular/router';
-import {LoginUser} from '../../models/login-user';
-import {User} from '../../models/user';
-import {redirectTo} from '../../utils/router-functions';
+import { Injectable } from '@angular/core';
+import PocketBase, { ListResult, RecordModel } from 'pocketbase';
+import { Router } from '@angular/router';
+import { LoginUser } from '../../models/login-user';
+import { User } from '../../models/user';
+import { redirectTo } from '../../utils/router-functions';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +11,7 @@ import {redirectTo} from '../../utils/router-functions';
 export class AuthService {
   private pb = new PocketBase('http://localhost:8090');
 
-  constructor(
-    private router: Router,
-  ) {}
+  constructor(private router: Router) {}
 
   public async register(user: User) {
     if (user) {
@@ -58,21 +56,24 @@ export class AuthService {
 
   public async buyCheatsheet(id: string) {
     const user = this.getLoggedInUser();
-    let cheatsheetPrice: number = 0
-    await this.pb.collection('cheatsheets').getOne(id, {
-      fields: 'price'
-    }).then((price) => {
-      cheatsheetPrice = price['price']
-    })
+    let cheatsheetPrice: number = 0;
+    await this.pb
+      .collection('cheatsheets')
+      .getOne(id, {
+        fields: 'price',
+      })
+      .then((price) => {
+        cheatsheetPrice = price['price'];
+      });
     if (!user) return;
 
     const currentCheatsheets = user['acquired_cheatsheets'] || [];
-    const currentCredits = user['credits'] || 0
+    const currentCredits = user['credits'] || 0;
     const updatedCheatsheets = [...currentCheatsheets, id];
-    if (updatedCheatsheets && cheatsheetPrice<currentCredits){
+    if (updatedCheatsheets && cheatsheetPrice < currentCredits) {
       await this.pb.collection('users').update(user.id, {
         acquired_cheatsheets: updatedCheatsheets,
-        credits: currentCredits-cheatsheetPrice
+        credits: currentCredits - cheatsheetPrice,
       });
     }
   }

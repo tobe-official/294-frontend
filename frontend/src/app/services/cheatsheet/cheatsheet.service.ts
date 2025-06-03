@@ -31,12 +31,12 @@ export class CheatsheetService {
     return this.pb.collection('cheatsheets').getOne(id);
   }
 
-  public async updateCheatsheetStars(stars: number, id: string){
-    if (stars && id){
+  public async updateCheatsheetStars(stars: number, id: string) {
+    if (stars && id) {
       return this.pb.collection('cheatsheets').update(id, {
-        stars
-      })
+        stars,
+      });
     }
-    throw new Error('stars or id are invalid')
+    throw new Error('stars or id are invalid');
   }
 }
