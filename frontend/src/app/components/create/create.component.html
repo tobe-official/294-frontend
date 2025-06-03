@@ -47,13 +47,22 @@
             <mat-hint>{{ "create.form.descriptionHint" | translate }}</mat-hint>
           </mat-form-field>
         </div>
-        <div>
-          <mat-form-field>
+        <div class="form-field">
+          <mat-form-field appearance="outline">
             <mat-label>{{ "create.form.price" | translate }}</mat-label>
-            <input matInput [formControl]="form.controls.price" />
-            @if (form.controls.price.hasError("required") && this.touched()) {
-              <mat-error>{{ "create.form.price" | translate }} </mat-error>
+            <input
+              matInput
+              type="number"
+              min="0"
+              [formControl]="form.controls.price"
+              placeholder="{{ 'create.form.pricePlaceholder' | translate }}"
+            />
+            @if (getFieldError("price")) {
+              <mat-error>{{
+                getFieldErrorMessage("price") | translate
+              }}</mat-error>
             }
+            <mat-hint>{{ "create.form.priceHint" | translate }}</mat-hint>
           </mat-form-field>
         </div>
 

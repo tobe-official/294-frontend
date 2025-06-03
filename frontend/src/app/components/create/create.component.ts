@@ -65,11 +65,10 @@ export class CreateComponent {
       Validators.required,
       this.urlValidator,
     ]),
-    title: new FormControl<string>('', [Validators.required]),
-    description: new FormControl<string>('', [Validators.required]),
-    price: new FormControl<number>(0, [Validators.required]),
-    pdfUrl: new FormControl<string>('', [Validators.required]),
-    thumbnailUrl: new FormControl<string>('', [Validators.required]),
+    price: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(0),
+    ]),
   });
 
   private readonly loggedInUser: RecordModel | null;
@@ -112,6 +111,7 @@ export class CreateComponent {
       'notPdfUrl',
       'notImageUrl',
       'hasSpecialChars',
+      'min',
     ];
 
     for (const key of errorPriority) {
@@ -129,6 +129,7 @@ export class CreateComponent {
       case 'required':
       case 'minlength':
       case 'maxlength':
+      case 'min':
         return `create.form.${fieldName}${capitalize(errorType)}`;
       case 'invalidUrl':
       case 'notPdfUrl':
@@ -152,7 +153,7 @@ export class CreateComponent {
 
     if (!this.form.valid || !this.loggedInUser) return;
 
-    const { title, description, pdfUrl, thumbnailUrl } =
+    const { title, description, pdfUrl, thumbnailUrl, price } =
       this.form.getRawValue();
 
     const cheatSheet: Cheatsheet = {
@@ -162,6 +163,7 @@ export class CreateComponent {
       thumbnailUrl: thumbnailUrl?.trim() ?? '',
       uploader: this.loggedInUser.id,
       stars: 1,
+      price: price ?? 0,
     };
 
     this.cheatsheetService.create(cheatSheet).then((record) => {
@@ -179,6 +181,7 @@ type CreateFormFields = {
   description: FormControl<string>;
   pdfUrl: FormControl<string>;
   thumbnailUrl: FormControl<string>;
+  price: FormControl<number | null>;
 };
 
 function capitalize(str: string): string {
