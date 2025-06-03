@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Cheatsheet } from '../../models/cheatsheet';
 import PocketBase, { ListResult, RecordModel } from 'pocketbase';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +9,12 @@ import PocketBase, { ListResult, RecordModel } from 'pocketbase';
 export class CheatsheetService {
   private pb = new PocketBase('http://localhost:8090');
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   public async create(cheatsheet: Cheatsheet): Promise<RecordModel | null> {
-    if (cheatsheet) {
+    const loggedInUser = this.authService.getLoggedInUser();
+    if (cheatsheet && loggedInUser) {
+      await this.authService.addCreditsToUser(1, loggedInUser['id']);
       return this.pb.collection('cheatsheets').create(cheatsheet);
     }
     throw new Error('invalid cheatsheet');

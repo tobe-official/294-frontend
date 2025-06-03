@@ -83,4 +83,14 @@ export class AuthService {
     if (!user || !user['acquired_cheatsheets']) return false;
     return user['acquired_cheatsheets'].includes(cheatsheetId);
   }
+
+  public async addCreditsToUser(amount: number, id: string) {
+    let user: RecordModel | null = null;
+    user = await this.getUserById(id);
+    if (!user) return;
+    const currentCredits = user['credits'] || 0;
+    await this.pb.collection('users').update(user.id, {
+      credits: currentCredits + amount,
+    });
+  }
 }
