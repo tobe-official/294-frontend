@@ -30,8 +30,8 @@ export class CheatsheetComponent {
     collectionId: '',
     collectionName: '',
   };
-  public loggedInUserCredits: number;
-  public loggedInUserId: string;
+  public loggedInUserCredits: number = -1;
+  public loggedInUserId: string = '';
   private cheatsheetId: string = '';
   private activatedRoute = inject(ActivatedRoute);
   public reviews: RecordModel[] = [];
@@ -46,32 +46,7 @@ export class CheatsheetComponent {
     private cheatsheetService: CheatsheetService,
     private reviewService: ReviewService,
   ) {
-    const loggedInUser = this.authService.getLoggedInUser();
-    this.loggedInUserCredits = loggedInUser ? loggedInUser['credits'] : -1;
-    this.loggedInUserId = loggedInUser ? loggedInUser['id'] : '';
-    this.activatedRoute.params.subscribe((params) => {
-      this.cheatsheetId = params['id'];
-    });
-    if (this.cheatsheetId) {
-      this.cheatsheetService
-        .getCheatsheetById(this.cheatsheetId)
-        .then((cheatsheet) => {
-          this.cheatsheet = cheatsheet;
-        });
-    }
-    this.reviewService
-      .getReviewsByCheatsheetId(this.cheatsheetId)
-      .then((reviews) => {
-        this.reviews = reviews;
-        const hasReviewed = reviews.some(
-          (review) => review['user'] === this.loggedInUserId,
-        );
-        this.ratingSubmitted = signal(hasReviewed);
-      });
-
-    this.cheatsheetAcquired = authService.hasLoggedInUserAcquiredCheatsheet(
-      this.cheatsheetId,
-    );
+    this.fetchData();
   }
 
   public buyCheatsheet() {
@@ -96,6 +71,7 @@ export class CheatsheetComponent {
       this.reviewService.createReview(review).then((record) => {
         if (record) {
           this.ratingSubmitted = signal(true);
+          this.fetchData();
         } else {
           console.error('Creation failed');
         }
@@ -108,5 +84,33 @@ export class CheatsheetComponent {
         });
       this.cheatsheetService.updateCheatsheetStars(number, this.cheatsheetId);
     }
+  }
+
+  private fetchData() {
+    const loggedInUser = this.authService.getLoggedInUser();
+    this.loggedInUserCredits = loggedInUser ? loggedInUser['credits'] : -1;
+    this.loggedInUserId = loggedInUser ? loggedInUser['id'] : '';
+    this.activatedRoute.params.subscribe((params) => {
+      this.cheatsheetId = params['id'];
+    });
+    if (this.cheatsheetId) {
+      this.cheatsheetService
+        .getCheatsheetById(this.cheatsheetId)
+        .then((cheatsheet) => {
+          this.cheatsheet = cheatsheet;
+        });
+    }
+    this.reviewService
+      .getReviewsByCheatsheetId(this.cheatsheetId)
+      .then((reviews) => {
+        this.reviews = reviews;
+        const hasReviewed = reviews.some(
+          (review) => review['user'] === this.loggedInUserId,
+        );
+        this.ratingSubmitted = signal(hasReviewed);
+      });
+
+    this.cheatsheetAcquired =
+      this.authService.hasLoggedInUserAcquiredCheatsheet(this.cheatsheetId);
   }
 }
