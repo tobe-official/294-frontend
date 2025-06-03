@@ -23,6 +23,7 @@ import { CheatsheetService } from '../../services/cheatsheet/cheatsheet.service'
 import { HeaderComponent } from '../header/header.component';
 import { Cheatsheet } from '../../models/cheatsheet';
 import { RecordModel } from 'pocketbase';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-create',
@@ -36,6 +37,7 @@ import { RecordModel } from 'pocketbase';
     MatError,
     TranslatePipe,
     HeaderComponent,
+    MatIcon,
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss',

@@ -58,9 +58,9 @@
               placeholder="{{ 'create.form.pricePlaceholder' | translate }}"
             />
             @if (getFieldError("price")) {
-              <mat-error>{{
-                getFieldErrorMessage("price") | translate
-              }}</mat-error>
+              <mat-error
+                >{{ getFieldErrorMessage("price") | translate }}
+              </mat-error>
             }
             <mat-hint>{{ "create.form.priceHint" | translate }}</mat-hint>
           </mat-form-field>
@@ -107,7 +107,11 @@
         </div>
 
         <div class="upload-hint">
-          <div class="hint-icon">💡</div>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Hint lightbulb"
+            fontIcon="lightbulb_2"
+          ></mat-icon>
           <p>{{ "create.form.uploadHint" | translate }}</p>
         </div>
 
