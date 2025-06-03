@@ -70,6 +70,10 @@
         .form-field {
           position: relative;
 
+          mat-form-field {
+            width: 100%;
+          }
+
           .mat-mdc-form-field-subscript-wrapper {
             margin-top: 0.25rem;
           }
