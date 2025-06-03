@@ -64,7 +64,7 @@
       "descriptionInvalid": "Invalid description format",
       "thumbnailUrl": "Url for thumbnail image",
       "thumbnailUrlPlaceholder": "https://link-to-your-thumbnail.png",
-      "thumbnailUrlHint": "URL to an image file (jpg, png, gif, etc.)",
+      "thumbnailUrlHint": "URL to an image file (jpg, png, etc.)",
       "thumbnailUrlRequired": "Thumbnail URL is required",
       "thumbnailUrlInvalid": "Invalid thumbnail URL format",
       "notImageUrl": "Please provide a valid image URL ending in .jpg, .png, etc.",
