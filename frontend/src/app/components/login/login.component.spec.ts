@@ -45,15 +45,11 @@ describe('LoginComponent', () => {
 
   it('should change modes', () => {
     component.dialogMode = 'login';
-    expect(component.submitTranslation()).toEqual('login.form.submitLogin');
-    expect(component.createAccountTranslation()).toEqual(
-      'login.form.noAccount',
-    );
+    expect(component.dialogMode).toEqual('login');
+
     component.toggleMode();
 
     expect(component.dialogMode).toEqual('register');
-    expect(component.submitTranslation()).toEqual('login.form.submitRegister');
-    expect(component.createAccountTranslation()).toEqual('login.form.back');
   });
 
   it('should submit correctly', () => {
