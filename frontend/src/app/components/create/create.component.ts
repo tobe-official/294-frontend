@@ -86,7 +86,7 @@ export class CreateComponent {
   private noSpecialCharsValidator(
     control: AbstractControl,
   ): ValidationErrors | null {
-    return /[<>{}[\]\\\/]/.test(control.value)
+    return /[<>{}[\]\\/]/.test(control.value)
       ? { hasSpecialChars: true }
       : null;
   }
